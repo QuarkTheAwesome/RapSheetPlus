@@ -6,11 +6,12 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import com.nuclearw.rapsheet.Rapsheet;
 import com.nuclearw.rapsheet.Record;
 
-public class LookupCommandExecutor extends BaseCommandExecutor {
+public class LookupCommandExecutor extends RapsheetCommand implements CommandExecutor {
 	public LookupCommandExecutor(Rapsheet plugin) {
 		super(plugin);
 	}

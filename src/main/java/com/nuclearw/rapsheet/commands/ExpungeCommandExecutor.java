@@ -2,13 +2,14 @@ package com.nuclearw.rapsheet.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.nuclearw.rapsheet.Rapsheet;
 import com.nuclearw.rapsheet.Record;
 
-public class ExpungeCommandExecutor extends BaseCommandExecutor {
+public class ExpungeCommandExecutor extends RapsheetCommand implements CommandExecutor {
 	public ExpungeCommandExecutor(Rapsheet plugin) {
 		super(plugin);
 	}

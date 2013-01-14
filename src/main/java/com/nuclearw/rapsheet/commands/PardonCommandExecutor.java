@@ -2,6 +2,7 @@ package com.nuclearw.rapsheet.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -9,7 +10,7 @@ import com.nuclearw.rapsheet.Rapsheet;
 import com.nuclearw.rapsheet.Record;
 import com.nuclearw.rapsheet.RecordState;
 
-public class PardonCommandExecutor extends BaseCommandExecutor {
+public class PardonCommandExecutor extends RapsheetCommand implements CommandExecutor {
 	public PardonCommandExecutor(Rapsheet plugin) {
 		super(plugin);
 	}

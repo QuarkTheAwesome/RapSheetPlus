@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -11,7 +12,7 @@ import com.nuclearw.rapsheet.Rapsheet;
 import com.nuclearw.rapsheet.Record;
 import com.nuclearw.rapsheet.RecordState;
 
-public class ChargeCommandExecutor extends BaseCommandExecutor {
+public class ChargeCommandExecutor extends RapsheetCommand implements CommandExecutor {
 	public ChargeCommandExecutor(Rapsheet plugin) {
 		super(plugin);
 	}
