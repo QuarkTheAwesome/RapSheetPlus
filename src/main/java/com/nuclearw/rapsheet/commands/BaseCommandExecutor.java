@@ -26,6 +26,7 @@ public class BaseCommandExecutor extends RapsheetCommand implements CommandExecu
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(args.length == 0) {
 			printHelp(sender, label);
+			return true;
 		}
 
 		if(args[0].equalsIgnoreCase("lookup")) {
