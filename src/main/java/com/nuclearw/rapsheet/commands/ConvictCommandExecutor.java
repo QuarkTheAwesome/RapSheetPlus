@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 import com.nuclearw.rapsheet.Rapsheet;
+import com.nuclearw.rapsheet.Record;
 
 public class ConvictCommandExecutor extends BaseCommandExecutor {
 	public ConvictCommandExecutor(Rapsheet plugin) {
@@ -15,6 +16,24 @@ public class ConvictCommandExecutor extends BaseCommandExecutor {
 		if(args.length != 3) {
 			printArgsError(args);
 			printHelp(sender, label);
+			return true;
+		}
+
+		String target = findTarget(args[1]);
+
+		int chargeId = -1;
+
+		try {
+			chargeId = Integer.valueOf(args[2]);
+		} catch (NumberFormatException ex) {
+			printHelp(sender, label);
+			return true;
+		}
+
+		Record found = plugin.getDatabase().find(Record.class).where().ieq("offender", target).eq("charge_id", chargeId).findUnique();
+
+		if(found == null) {
+			sender.sendMessage(COULD_NOT_FIND_CHARGE.replace("<PLAYER>", target));
 			return true;
 		}
 
