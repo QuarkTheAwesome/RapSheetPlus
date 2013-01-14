@@ -50,7 +50,7 @@ public class ChargeCommandExecutor extends BaseCommandExecutor {
 		record.setChargeId(newChargeId);
 		record.setOffender(offender.getName());
 		record.setOfficial(sender.getName());
-		record.setChargeLong(args[2]);
+		record.setChargeShort(args[2]);
 		record.setChargeLong(chargeDescription);
 		record.setTime(System.currentTimeMillis());
 		record.setSealed(false);
