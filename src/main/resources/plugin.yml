@@ -5,7 +5,7 @@ author: NuclearW
 description: BackgroundCheck lets you charge players of crimes, and then look them up later.
 database: true
 commands:
-    lookup:
+    backgroundcheck:
         description: BackgroudCheck root command
         usage: |
             /<command>
