@@ -23,9 +23,9 @@ public class LookupCommandExecutor extends BaseCommandExecutor {
 			return true;
 		}
 
-		if(args.length == 2) {
-			String target = findTarget(args[1]);
+		String target = findTarget(args[1]);
 
+		if(args.length == 2) {
 			List<Record> found = plugin.getDatabase().find(Record.class).where().ieq("offender", target).findList();
 
 			if(found == null || found.isEmpty()) {
@@ -72,6 +72,26 @@ public class LookupCommandExecutor extends BaseCommandExecutor {
 
 				sender.sendMessage(message);
 			}
+		}
+
+		if(args.length == 3) {
+			int chargeId = -1;
+
+			try {
+				chargeId = Integer.valueOf(args[2]);
+			} catch (NumberFormatException ex) {
+				printHelp(sender, label);
+				return true;
+			}
+
+			Record found = plugin.getDatabase().find(Record.class).where().ieq("offender", target).eq("charge_id", chargeId).findUnique();
+
+			if(found == null) {
+				sender.sendMessage(COULD_NOT_FIND_CHARGE.replace("<PLAYER>", target));
+				return true;
+			}
+
+			// TODO: The part where we show them the record.
 		}
 
 		return true;
