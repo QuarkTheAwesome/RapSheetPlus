@@ -1,0 +1,7 @@
+== BackgroundCheck
+
+BackgroundCheck lets you charge players of crimes, and then look them up later.
+
+=== Compiling
+
+Maven 3 is required to compile BackgroundCheck

@@ -1,0 +1,43 @@
+name: BackgroundCheck
+main: com.nuclearw.backgroundcheck.BackgroundCheck
+version: ${project.version}
+author: NuclearW
+description: BackgroundCheck lets you charge players of crimes, and then look them up later.
+database: true
+commands:
+    lookup:
+        description: BackgroudCheck root command
+        usage: |
+            /<command>
+permissions:
+    backgroundcheck.*:
+        description: Gives access to all BackgroundCheck commands
+        children:
+            backgroundcheck.lookup: true
+            backgroundcheck.charge: true
+            backgroundcheck.convict: true
+            backgroundcheck.pardon: true
+            backgroundcheck.seal: true
+            backgroundcheck.viewsealed: true
+            backgroundcheck.expunge: true
+    backgroundcheck.lookup:
+        description: Allows you to do a lookup
+        default: true
+    backgroundcheck.charge:
+        description: Allows you to charge a player
+        default: op
+    backgroundcheck.convict:
+        description: Allows you to convict a player
+        default: op
+    backgroundcheck.pardon:
+        description: Allows you to pardon a player
+        default: op
+    backgroundcheck.seal:
+        description: Allows you to seal a record
+        default: op
+    backgroundcheck.viewsealed:
+        description: Allows you to view sealed records
+        default: op
+    backgroundcheck.expunge:
+        description: Allows you to expunge a record
+        default: op
