@@ -8,30 +8,22 @@ import org.bukkit.command.CommandSender;
 import com.nuclearw.rapsheet.Rapsheet;
 
 public class BaseCommandExecutor implements CommandExecutor {
-	private Rapsheet plugin;
+	protected Rapsheet plugin;
 
 	private final static String NO_PERMISSION = ChatColor.RED + "You do not have permission to use that command!";
 	protected final static String COULD_NOT_FIND_PLAYER = ChatColor.RED + "Could not find that player!";
 	protected final static String COULD_NOT_FIND_CHARGE = ChatColor.RED + "Could not find that charge for <PLAYER>!";
 
-	private CommandExecutor lookupCommand;
-	private CommandExecutor chargeCommand;
-	private CommandExecutor convictCommand;
-	private CommandExecutor pardonCommand;
-	private CommandExecutor sealCommand;
-	private CommandExecutor unsealCommand;
-	private CommandExecutor expungeCommand;
+	private CommandExecutor lookupCommand  = new LookupCommandExecutor(plugin);
+	private CommandExecutor chargeCommand  = new ChargeCommandExecutor(plugin);
+	private CommandExecutor convictCommand = new ConvictCommandExecutor(plugin);
+	private CommandExecutor pardonCommand  = new PardonCommandExecutor(plugin);
+	private CommandExecutor sealCommand    = new SealCommandExecutor(plugin);
+	private CommandExecutor unsealCommand  = new UnsealCommandExecutor(plugin);
+	private CommandExecutor expungeCommand = new ExpungeCommandExecutor(plugin);
 
 	public BaseCommandExecutor(Rapsheet plugin) {
 		this.plugin = plugin;
-
-		this.lookupCommand  = new LookupCommandExecutor(plugin);
-		this.chargeCommand  = new ChargeCommandExecutor(plugin);
-		this.convictCommand = new ConvictCommandExecutor(plugin);
-		this.pardonCommand  = new PardonCommandExecutor(plugin);
-		this.sealCommand    = new SealCommandExecutor(plugin);
-		this.unsealCommand  = new UnsealCommandExecutor(plugin);
-		this.expungeCommand = new ExpungeCommandExecutor(plugin);
 	}
 
 	@Override
@@ -99,7 +91,19 @@ public class BaseCommandExecutor implements CommandExecutor {
 		return true;
 	}
 
-	protected static void printHelp(CommandSender sender, String label) {
+	protected void printArgsError(String[] args) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Invalid arguments passed to ");
+		sb.append(this.getClass().getName());
+		sb.append(": ");
+		for(String arg : args) {
+			sb.append(arg);
+			sb.append(" ");
+		}
+		plugin.getLogger().severe(sb.toString());
+	}
+
+	protected void printHelp(CommandSender sender, String label) {
 		if(sender.hasPermission("rapsheet.lookup")) {
 			sender.sendMessage(ChatColor.GRAY + "/" + label + " lookup <player>");
 			sender.sendMessage(ChatColor.GRAY + "/" + label + " lookup <player> <charge#>");
