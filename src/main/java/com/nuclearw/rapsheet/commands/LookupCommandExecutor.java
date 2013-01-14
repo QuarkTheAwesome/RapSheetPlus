@@ -94,8 +94,8 @@ public class LookupCommandExecutor extends BaseCommandExecutor {
 
 			sender.sendMessage(ChatColor.GOLD + "----- " + ChatColor.AQUA + target + ChatColor.GOLD + " -----");
 			sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + chargeId + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
-			sender.sendMessage(ChatColor.GOLD + "Filed: " + ChatColor.AQUA + format.format(found.getTime()) + ChatColor.GOLD + " Official: " + ChatColor.AQUA + found.getOfficial());
-			sender.sendMessage(ChatColor.GOLD + "Report: " + ChatColor.GRAY + found.getChargeLong());
+			sender.sendMessage(ChatColor.GOLD + "Filed" + ChatColor.RESET + ": " + ChatColor.AQUA + format.format(found.getTime()) + ChatColor.GOLD + " Official: " + ChatColor.AQUA + found.getOfficial());
+			sender.sendMessage(ChatColor.GOLD + "Report" + ChatColor.RESET + ": " + ChatColor.GRAY + found.getChargeLong());
 		}
 
 		return true;
