@@ -23,6 +23,8 @@ public class LookupCommandExecutor extends BaseCommandExecutor {
 			return true;
 		}
 
+		SimpleDateFormat format = new SimpleDateFormat("MMM d, yyyy h:mm");
+
 		String target = findTarget(args[1]);
 
 		if(args.length == 2) {
@@ -44,7 +46,6 @@ public class LookupCommandExecutor extends BaseCommandExecutor {
 				if(record.isSealed() && !sender.hasPermission("rapsheet.viewsealed")) {
 					message += ChatColor.GRAY + "-Sealed-";
 				} else {
-					SimpleDateFormat format = new SimpleDateFormat("MMM d, yyyy h:mm");
 					message += format.format(record.getTime()) + " ";
 
 					message += ChatColor.GRAY + "[";
