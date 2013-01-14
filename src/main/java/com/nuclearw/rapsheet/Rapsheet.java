@@ -7,10 +7,14 @@ import javax.persistence.PersistenceException;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.nuclearw.rapsheet.commands.BaseCommandExecutor;
+
 public class Rapsheet extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		initDatabase();
+
+		getCommand("rapsheet").setExecutor(new BaseCommandExecutor(this));
 
 		getLogger().info("Finished loading " + getDescription().getFullName());
 	}
