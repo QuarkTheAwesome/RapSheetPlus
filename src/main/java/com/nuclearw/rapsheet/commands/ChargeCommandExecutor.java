@@ -2,6 +2,7 @@ package com.nuclearw.rapsheet.commands;
 
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -42,7 +43,10 @@ public class ChargeCommandExecutor extends BaseCommandExecutor {
 
 		StringBuilder sb = new StringBuilder();
 
-		// TODO: Make charge description from args
+		for(int i = 3; i < args.length; i++) {
+			sb.append(args[i]);
+			sb.append(" ");
+		}
 
 		String chargeDescription = sb.toString().trim();
 
@@ -57,6 +61,13 @@ public class ChargeCommandExecutor extends BaseCommandExecutor {
 		record.setState(RecordState.CHARGED);
 
 		plugin.getDatabase().save(record);
+
+		sender.sendMessage(ChatColor.GOLD + "Charged" + ChatColor.RESET + ": " + ChatColor.AQUA + offender.getName());
+		sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + newChargeId + ChatColor.GOLD + " - " + ChatColor.AQUA + args[2]);
+		sender.sendMessage(ChatColor.GOLD + "Report" + ChatColor.RESET + ": " + ChatColor.GRAY + chargeDescription);
+
+		offender.sendMessage(ChatColor.GOLD + "Charged by " + ChatColor.AQUA + sender.getName() + ChatColor.GOLD + " of " + ChatColor.GRAY + args[2]);
+		offender.sendMessage(ChatColor.GOLD + "Filed under Charge " + ChatColor.RESET + "#" + newChargeId);
 
 		return true;
 	}
