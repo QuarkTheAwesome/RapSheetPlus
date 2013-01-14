@@ -1,6 +1,7 @@
 package com.nuclearw.rapsheet.commands;
 
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -89,6 +90,20 @@ public class BaseCommandExecutor implements CommandExecutor {
 		}
 
 		return true;
+	}
+
+	protected String findTarget(String target) {
+		OfflinePlayer search = plugin.getServer().getPlayer(target);
+
+		if(search == null) {
+			plugin.getServer().getOfflinePlayer(target);
+		}
+
+		if(search != null) {
+			target = search.getName();
+		}
+
+		return target;
 	}
 
 	protected void printArgsError(String[] args) {
