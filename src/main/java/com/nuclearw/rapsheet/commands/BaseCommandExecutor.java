@@ -10,9 +10,9 @@ import com.nuclearw.rapsheet.Rapsheet;
 public class BaseCommandExecutor implements CommandExecutor {
 	protected Rapsheet plugin;
 
-	private final static String NO_PERMISSION = ChatColor.RED + "You do not have permission to use that command!";
-	protected final static String COULD_NOT_FIND_PLAYER = ChatColor.RED + "Could not find that player!";
-	protected final static String COULD_NOT_FIND_CHARGE = ChatColor.RED + "Could not find that charge for <PLAYER>!";
+	private final String NO_PERMISSION = ChatColor.RED + "You do not have permission to use that command!";
+	protected final String COULD_NOT_FIND_PLAYER = ChatColor.RED + "Could not find that player!";
+	protected final String COULD_NOT_FIND_CHARGE = ChatColor.RED + "Could not find that charge for <PLAYER>!";
 
 	private CommandExecutor lookupCommand  = new LookupCommandExecutor(plugin);
 	private CommandExecutor chargeCommand  = new ChargeCommandExecutor(plugin);
