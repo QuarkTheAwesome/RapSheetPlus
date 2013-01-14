@@ -16,6 +16,10 @@ public class Record {
 	@Column(name="id")
 	private int id;
 
+	@NotNull
+	@Column(name="charge_id")
+	private int chargeId;
+
 	@NotEmpty
 	@Column(name="offender")
 	private String offender;
@@ -50,6 +54,14 @@ public class Record {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getChargeId() {
+		return chargeId;
+	}
+
+	public void setChargeId(int chargeId) {
+		this.chargeId = chargeId;
 	}
 
 	public String getOffender() {
