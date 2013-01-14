@@ -45,7 +45,7 @@ public class UnsealCommandExecutor extends RapsheetCommand implements CommandExe
 			return true;
 		}
 
-		found.setSealed(true);
+		found.setSealed(false);
 
 		plugin.getDatabase().update(found);
 
