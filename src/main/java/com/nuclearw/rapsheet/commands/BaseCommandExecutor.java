@@ -14,6 +14,7 @@ public class BaseCommandExecutor implements CommandExecutor {
 	private final String NO_PERMISSION = ChatColor.RED + "You do not have permission to use that command!";
 	protected final String COULD_NOT_FIND_PLAYER = ChatColor.RED + "Could not find that player!";
 	protected final String COULD_NOT_FIND_CHARGE = ChatColor.RED + "Could not find that charge for <PLAYER>!";
+	protected final String CANNOT_MODIFY_SEALED  = ChatColor.RED + "You cannot modify a sealed record you cannot see!";
 
 	private CommandExecutor lookupCommand  = new LookupCommandExecutor(plugin);
 	private CommandExecutor chargeCommand  = new ChargeCommandExecutor(plugin);

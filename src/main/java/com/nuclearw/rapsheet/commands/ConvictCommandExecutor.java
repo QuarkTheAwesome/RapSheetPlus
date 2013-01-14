@@ -54,6 +54,11 @@ public class ConvictCommandExecutor extends BaseCommandExecutor {
 			return true;
 		}
 
+		if(found.isSealed() && !sender.hasPermission("rapsheet.viewsealed")) {
+			sender.sendMessage(CANNOT_MODIFY_SEALED);
+			return true;
+		}
+
 		found.setState(RecordState.CONVICTED);
 
 		plugin.getDatabase().update(found);
