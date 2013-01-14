@@ -1,10 +1,13 @@
 package com.nuclearw.rapsheet.commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import com.nuclearw.rapsheet.Rapsheet;
 import com.nuclearw.rapsheet.Record;
+import com.nuclearw.rapsheet.RecordState;
 
 public class PardonCommandExecutor extends BaseCommandExecutor {
 	public PardonCommandExecutor(Rapsheet plugin) {
@@ -36,6 +39,34 @@ public class PardonCommandExecutor extends BaseCommandExecutor {
 			sender.sendMessage(COULD_NOT_FIND_CHARGE.replace("<PLAYER>", target));
 			return true;
 		}
+
+		if(found.isSealed() && !sender.hasPermission("rapsheet.viewsealed")) {
+			sender.sendMessage(CANNOT_MODIFY_SEALED);
+			return true;
+		}
+
+		if(found.getState() == RecordState.PARDONED) {
+			sender.sendMessage(ChatColor.RED + "You cannot pardon a charge that is already pardoned!");
+			return true;
+		}
+
+		found.setState(RecordState.PARDONED);
+
+		plugin.getDatabase().update(found);
+
+		sender.sendMessage(ChatColor.LIGHT_PURPLE + "Pardoned" + ChatColor.RESET + ": " + ChatColor.AQUA + found.getOffender());
+		sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
+		sender.sendMessage(ChatColor.GOLD + "Report" + ChatColor.RESET + ": " + ChatColor.GRAY + found.getChargeLong());
+
+		// Notify player if they are online
+		Player player = plugin.getServer().getPlayer(target);
+
+		if(player == null) {
+			return true;
+		}
+
+		player.sendMessage(ChatColor.LIGHT_PURPLE + "Pardoned" + ChatColor.GOLD + " by " + ChatColor.AQUA + sender.getName() + ChatColor.GOLD + " of " + ChatColor.GRAY + found.getChargeShort());
+		player.sendMessage(ChatColor.GOLD + "Filed under Charge " + ChatColor.RESET + "#" + found.getChargeId());
 
 		return true;
 	}
