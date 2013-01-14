@@ -70,10 +70,12 @@ public class ConvictCommandExecutor extends BaseCommandExecutor {
 		// Notify player if they are online
 		Player player = plugin.getServer().getPlayer(target);
 
-		if(player != null) {
-			player.sendMessage(ChatColor.DARK_RED + "Convicted" + ChatColor.GOLD + " by " + ChatColor.AQUA + sender.getName() + ChatColor.GOLD + " of " + ChatColor.GRAY + found.getChargeShort());
-			player.sendMessage(ChatColor.GOLD + "Filed under Charge " + ChatColor.RESET + "#" + found.getChargeId());
+		if(player == null) {
+			return true;
 		}
+
+		player.sendMessage(ChatColor.DARK_RED + "Convicted" + ChatColor.GOLD + " by " + ChatColor.AQUA + sender.getName() + ChatColor.GOLD + " of " + ChatColor.GRAY + found.getChargeShort());
+		player.sendMessage(ChatColor.GOLD + "Filed under Charge " + ChatColor.RESET + "#" + found.getChargeId());
 
 		return true;
 	}
