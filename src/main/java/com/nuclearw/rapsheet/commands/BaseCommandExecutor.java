@@ -35,54 +35,44 @@ public class BaseCommandExecutor extends RapsheetCommand implements CommandExecu
 				return true;
 			}
 			lookupCommand.onCommand(sender, cmd, label, args);
-		}
-
-		if(args[0].equalsIgnoreCase("charge")) {
+		} else if(args[0].equalsIgnoreCase("charge")) {
 			if(!sender.hasPermission("rapsheet.charge")) {
 				sender.sendMessage(NO_PERMISSION);
 				return true;
 			}
 			chargeCommand.onCommand(sender, cmd, label, args);
-		}
-
-		if(args[0].equalsIgnoreCase("convict")) {
+		} else if(args[0].equalsIgnoreCase("convict")) {
 			if(!sender.hasPermission("rapsheet.convict")) {
 				sender.sendMessage(NO_PERMISSION);
 				return true;
 			}
 			convictCommand.onCommand(sender, cmd, label, args);
-		}
-
-		if(args[0].equalsIgnoreCase("pardon")) {
+		} else if(args[0].equalsIgnoreCase("pardon")) {
 			if(!sender.hasPermission("rapsheet.pardon")) {
 				sender.sendMessage(NO_PERMISSION);
 				return true;
 			}
 			pardonCommand.onCommand(sender, cmd, label, args);
-		}
-
-		if(args[0].equalsIgnoreCase("seal")) {
+		} else if(args[0].equalsIgnoreCase("seal")) {
 			if(!sender.hasPermission("rapsheet.seal")) {
 				sender.sendMessage(NO_PERMISSION);
 				return true;
 			}
 			sealCommand.onCommand(sender, cmd, label, args);
-		}
-
-		if(args[0].equalsIgnoreCase("unseal")) {
+		} else if(args[0].equalsIgnoreCase("unseal")) {
 			if(!sender.hasPermission("rapsheet.seal")) {
 				sender.sendMessage(NO_PERMISSION);
 				return true;
 			}
 			unsealCommand.onCommand(sender, cmd, label, args);
-		}
-
-		if(args[0].equalsIgnoreCase("expunge")) {
+		} else if(args[0].equalsIgnoreCase("expunge")) {
 			if(!sender.hasPermission("rapsheet.expunge")) {
 				sender.sendMessage(NO_PERMISSION);
 				return true;
 			}
 			expungeCommand.onCommand(sender, cmd, label, args);
+		} else {
+			printHelp(sender, label);
 		}
 
 		return true;
