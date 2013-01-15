@@ -33,14 +33,18 @@ public class ExpungeCommandExecutor extends RapsheetCommand implements CommandEx
 			return true;
 		}
 
-		Record found = plugin.getDatabase().find(Record.class).where().ieq("offender", target).eq("charge_id", chargeId).findUnique();
+		Record found = Rapsheet.getManager().getCharge(target, chargeId);
 
 		if(found == null) {
 			sender.sendMessage(COULD_NOT_FIND_CHARGE.replace("<PLAYER>", target));
 			return true;
 		}
 
-		plugin.getDatabase().delete(found);
+		boolean success = Rapsheet.getManager().expungePlayerCharge(target, chargeId);
+
+		if(!success) {
+			plugin.getLogger().severe("Error trying to expunge player " + target + "'s chargeId: " + chargeId);
+		}
 
 		sender.sendMessage(ChatColor.GRAY + "Expunged " + ChatColor.GOLD + "charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
 

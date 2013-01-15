@@ -9,12 +9,18 @@ import javax.persistence.PersistenceException;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
 
+import com.nuclearw.rapsheet.api.RapsheetManager;
+import com.nuclearw.rapsheet.api.SimpleRapsheetManager;
 import com.nuclearw.rapsheet.commands.BaseCommandExecutor;
 
 public class Rapsheet extends JavaPlugin {
+	private static RapsheetManager manager;
+
 	@Override
 	public void onEnable() {
 		initDatabase();
+
+		manager = new SimpleRapsheetManager(this);
 
 		getCommand("rapsheet").setExecutor(new BaseCommandExecutor(this));
 
@@ -42,6 +48,10 @@ public class Rapsheet extends JavaPlugin {
 		List<Class<?>> list = new ArrayList<Class<?>>();
 		list.add(Record.class);
 		return list;
+	}
+
+	public static RapsheetManager getManager() {
+		return manager;
 	}
 
 	private void metrics() {

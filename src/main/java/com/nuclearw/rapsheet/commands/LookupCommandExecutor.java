@@ -29,7 +29,7 @@ public class LookupCommandExecutor extends RapsheetCommand implements CommandExe
 		String target = findTarget(args[1]);
 
 		if(args.length == 2) {
-			List<Record> found = plugin.getDatabase().find(Record.class).where().ieq("offender", target).findList();
+			List<Record> found = Rapsheet.getManager().getCharges(target);
 
 			if(found == null || found.isEmpty()) {
 				sender.sendMessage(COULD_NOT_FIND_PLAYER);
@@ -90,7 +90,7 @@ public class LookupCommandExecutor extends RapsheetCommand implements CommandExe
 				return true;
 			}
 
-			Record found = plugin.getDatabase().find(Record.class).where().ieq("offender", target).eq("charge_id", chargeId).findUnique();
+			Record found = Rapsheet.getManager().getCharge(target, chargeId);
 
 			if(found == null) {
 				sender.sendMessage(COULD_NOT_FIND_CHARGE.replace("<PLAYER>", target));

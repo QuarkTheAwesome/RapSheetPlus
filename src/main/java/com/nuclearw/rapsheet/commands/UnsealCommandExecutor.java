@@ -33,7 +33,7 @@ public class UnsealCommandExecutor extends RapsheetCommand implements CommandExe
 			return true;
 		}
 
-		Record found = plugin.getDatabase().find(Record.class).where().ieq("offender", target).eq("charge_id", chargeId).findUnique();
+		Record found = Rapsheet.getManager().getCharge(target, chargeId);
 
 		if(found == null) {
 			sender.sendMessage(COULD_NOT_FIND_CHARGE.replace("<PLAYER>", target));
@@ -45,9 +45,11 @@ public class UnsealCommandExecutor extends RapsheetCommand implements CommandExe
 			return true;
 		}
 
-		found.setSealed(false);
+		boolean success = Rapsheet.getManager().unsealPlayerCharge(target, chargeId);
 
-		plugin.getDatabase().update(found);
+		if(!success) {
+			plugin.getLogger().severe("Error trying to unseal player " + target + "'s chargeId: " + chargeId);
+		}
 
 		sender.sendMessage(ChatColor.GRAY + "Unsealed " + ChatColor.GOLD + "charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
 
