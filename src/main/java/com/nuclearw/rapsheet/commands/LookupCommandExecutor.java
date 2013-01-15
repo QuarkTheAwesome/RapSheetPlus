@@ -69,6 +69,10 @@ public class LookupCommandExecutor extends RapsheetCommand implements CommandExe
 
 					message += ChatColor.GRAY + "] ";
 
+					if(record.isSealed() && sender.hasPermission("rapsheet.viewsealed")) {
+						message += "[SEALED] ";
+					}
+
 					message += ChatColor.GOLD + record.getChargeShort();
 				}
 
@@ -93,10 +97,19 @@ public class LookupCommandExecutor extends RapsheetCommand implements CommandExe
 				return true;
 			}
 
+			if(found.isSealed() && !sender.hasPermission("rapsheet.viewsealed")) {
+				sender.sendMessage(ChatColor.RED + "You cannot view a sealed charge!");
+				return true;
+			}
+
 			sender.sendMessage(ChatColor.GOLD + "----- " + ChatColor.AQUA + target + ChatColor.GOLD + " -----");
 			sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + chargeId + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
 			sender.sendMessage(ChatColor.GOLD + "Filed" + ChatColor.RESET + ": " + ChatColor.AQUA + format.format(found.getTime()) + ChatColor.GOLD + " Official: " + ChatColor.AQUA + found.getOfficial());
 			sender.sendMessage(ChatColor.GOLD + "Report" + ChatColor.RESET + ": " + ChatColor.GRAY + found.getChargeLong());
+
+			if(found.isSealed() && sender.hasPermission("rapsheet.viewsealed")) {
+				sender.sendMessage(ChatColor.GOLD + "This charge is: " + ChatColor.GRAY + "sealed");
+			}
 		}
 
 		return true;
