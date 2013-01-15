@@ -7,6 +7,7 @@ database: true
 commands:
     rapsheet:
         description: Rapsheet root command
+        aliases: rs
         usage: |
             /<command>
 permissions:
