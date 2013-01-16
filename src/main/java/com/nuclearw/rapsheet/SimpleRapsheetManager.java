@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import com.nuclearw.rapsheet.api.NotifyChanges;
 import com.nuclearw.rapsheet.api.RapsheetManager;
 import com.nuclearw.rapsheet.api.events.RapsheetChargeEvent;
+import com.nuclearw.rapsheet.api.events.RapsheetConvictEvent;
 
 public class SimpleRapsheetManager implements RapsheetManager {
 	private Rapsheet plugin;
@@ -100,6 +101,9 @@ public class SimpleRapsheetManager implements RapsheetManager {
 		found.setState(RecordState.CONVICTED);
 
 		plugin.getDatabase().update(found);
+
+		RapsheetConvictEvent convictEvent = new RapsheetConvictEvent(offenderName, officialName, chargeId);
+		plugin.getServer().getPluginManager().callEvent(convictEvent);
 
 		if(notify == NotifyChanges.NONE) {
 			return true;
