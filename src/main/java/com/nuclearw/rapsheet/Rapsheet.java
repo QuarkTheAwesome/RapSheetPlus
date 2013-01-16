@@ -10,7 +10,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
 
 import com.nuclearw.rapsheet.api.RapsheetManager;
-import com.nuclearw.rapsheet.api.SimpleRapsheetManager;
 import com.nuclearw.rapsheet.commands.BaseCommandExecutor;
 
 public class Rapsheet extends JavaPlugin {

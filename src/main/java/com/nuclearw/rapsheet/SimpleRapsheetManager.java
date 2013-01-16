@@ -1,4 +1,4 @@
-package com.nuclearw.rapsheet.api;
+package com.nuclearw.rapsheet;
 
 import java.util.List;
 
@@ -6,9 +6,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.nuclearw.rapsheet.Rapsheet;
-import com.nuclearw.rapsheet.Record;
-import com.nuclearw.rapsheet.RecordState;
+import com.nuclearw.rapsheet.api.NotifyChanges;
+import com.nuclearw.rapsheet.api.RapsheetManager;
 
 public class SimpleRapsheetManager implements RapsheetManager {
 	private Rapsheet plugin;
