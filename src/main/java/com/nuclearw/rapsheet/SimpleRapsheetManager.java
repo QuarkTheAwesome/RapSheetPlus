@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import com.nuclearw.rapsheet.api.NotifyChanges;
 import com.nuclearw.rapsheet.api.RapsheetManager;
+import com.nuclearw.rapsheet.api.RapsheetPardonEvent;
 import com.nuclearw.rapsheet.api.events.RapsheetChargeEvent;
 import com.nuclearw.rapsheet.api.events.RapsheetConvictEvent;
 
@@ -152,6 +153,9 @@ public class SimpleRapsheetManager implements RapsheetManager {
 		found.setState(RecordState.PARDONED);
 
 		plugin.getDatabase().update(found);
+
+		RapsheetPardonEvent pardonEvent = new RapsheetPardonEvent(offenderName, officialName, chargeId);
+		plugin.getServer().getPluginManager().callEvent(pardonEvent);
 
 		if(notify == NotifyChanges.NONE) {
 			return true;
