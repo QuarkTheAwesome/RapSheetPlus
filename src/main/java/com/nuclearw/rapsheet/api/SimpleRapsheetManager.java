@@ -76,7 +76,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFENDER) {
 			if(player == null) {
-				plugin.getLogger().warning("Could not notify offender " + officialName + " of charge!");
+				plugin.getLogger().warning("Could not notify offender " + offenderName + " of charge!");
 			} else {
 				sender = (CommandSender) player;
 
@@ -124,7 +124,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFENDER) {
 			if(player == null) {
-				plugin.getLogger().warning("Could not notify offender " + officialName + " of charge!");
+				plugin.getLogger().warning("Could not notify offender " + offenderName + " of charge!");
 			} else {
 				sender = (CommandSender) player;
 
@@ -172,7 +172,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFENDER) {
 			if(player == null) {
-				plugin.getLogger().warning("Could not notify offender " + officialName + " of charge!");
+				plugin.getLogger().warning("Could not notify offender " + offenderName + " of charge!");
 			} else {
 				sender = (CommandSender) player;
 
@@ -218,7 +218,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFENDER) {
 			if(player == null) {
-				plugin.getLogger().warning("Could not notify offender " + officialName + " of charge!");
+				plugin.getLogger().warning("Could not notify offender " + offenderName + " of charge!");
 			} else {
 				sender = (CommandSender) player;
 
@@ -263,7 +263,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFENDER) {
 			if(player == null) {
-				plugin.getLogger().warning("Could not notify offender " + officialName + " of charge!");
+				plugin.getLogger().warning("Could not notify offender " + offenderName + " of charge!");
 			} else {
 				sender = (CommandSender) player;
 
@@ -306,7 +306,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFENDER) {
 			if(player == null) {
-				plugin.getLogger().warning("Could not notify offender " + officialName + " of charge!");
+				plugin.getLogger().warning("Could not notify offender " + offenderName + " of charge!");
 			} else {
 				sender = (CommandSender) player;
 
