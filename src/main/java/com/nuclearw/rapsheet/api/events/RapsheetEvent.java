@@ -6,10 +6,12 @@ import org.bukkit.event.HandlerList;
 public abstract class RapsheetEvent extends Event {
 	protected final String offenderName;
 	protected final String officialName;
+	protected final int chargeId;
 
-	public RapsheetEvent(final String offenderName, final String officialName) {
+	public RapsheetEvent(final String offenderName, final String officialName, final int chargeId) {
 		this.officialName = officialName;
 		this.offenderName = offenderName;
+		this.chargeId = chargeId;
 	}
 
 	public final String getOffender() {
@@ -18,6 +20,10 @@ public abstract class RapsheetEvent extends Event {
 
 	public final String getOfficial() {
 		return officialName;
+	}
+
+	public final int getChargeId() {
+		return chargeId;
 	}
 
 	// Required boilerplate
