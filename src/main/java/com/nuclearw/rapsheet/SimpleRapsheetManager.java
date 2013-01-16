@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import com.nuclearw.rapsheet.api.NotifyChanges;
 import com.nuclearw.rapsheet.api.RapsheetManager;
+import com.nuclearw.rapsheet.api.events.RapsheetChargeEvent;
 
 public class SimpleRapsheetManager implements RapsheetManager {
 	private Rapsheet plugin;
@@ -48,6 +49,9 @@ public class SimpleRapsheetManager implements RapsheetManager {
 		record.setState(RecordState.CHARGED);
 
 		plugin.getDatabase().save(record);
+
+		RapsheetChargeEvent chargeEvent = new RapsheetChargeEvent(offenderName, officialName, shortDescription, longDescription, newChargeId);
+		plugin.getServer().getPluginManager().callEvent(chargeEvent);
 
 		if(notify == NotifyChanges.NONE) {
 			return newChargeId;
