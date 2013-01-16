@@ -54,7 +54,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			return newChargeId;
 		}
 
-		CommandSender sender;
+		CommandSender sender = null;
 		// Hard code console check?
 		if(officialName.equals("CONSOLE")) {
 			sender = plugin.getServer().getConsoleSender();
@@ -63,10 +63,12 @@ public class SimpleRapsheetManager implements RapsheetManager {
 		Player player = plugin.getServer().getPlayer(officialName);
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
-			if(player == null) {
+			if(player == null && sender == null) {
 				plugin.getLogger().warning("Could not notify official " + officialName + " of charge!");
 			} else {
-				sender = (CommandSender) player;
+				if(player != null && sender == null) {
+					sender = (CommandSender) player;
+				}
 
 				sender.sendMessage(ChatColor.GOLD + "Charged" + ChatColor.RESET + ": " + ChatColor.AQUA + offenderName);
 				sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + newChargeId + ChatColor.GOLD + " - " + ChatColor.AQUA + shortDesciption);
@@ -78,10 +80,8 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			if(player == null) {
 				plugin.getLogger().warning("Could not notify offender " + offenderName + " of charge!");
 			} else {
-				sender = (CommandSender) player;
-
-				sender.sendMessage(ChatColor.GOLD + "Charged by " + ChatColor.AQUA + sender.getName() + ChatColor.GOLD + " of " + ChatColor.GRAY + shortDesciption);
-				sender.sendMessage(ChatColor.GOLD + "Filed under Charge " + ChatColor.RESET + "#" + newChargeId);
+				player.sendMessage(ChatColor.GOLD + "Charged by " + ChatColor.AQUA + sender.getName() + ChatColor.GOLD + " of " + ChatColor.GRAY + shortDesciption);
+				player.sendMessage(ChatColor.GOLD + "Filed under Charge " + ChatColor.RESET + "#" + newChargeId);
 			}
 		}
 
@@ -102,7 +102,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			return true;
 		}
 
-		CommandSender sender;
+		CommandSender sender = null;
 		// Hard code console check?
 		if(officialName.equals("CONSOLE")) {
 			sender = plugin.getServer().getConsoleSender();
@@ -111,10 +111,12 @@ public class SimpleRapsheetManager implements RapsheetManager {
 		Player player = plugin.getServer().getPlayer(officialName);
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
-			if(player == null) {
+			if(player == null && sender == null) {
 				plugin.getLogger().warning("Could not notify official " + officialName + " of charge!");
 			} else {
-				sender = (CommandSender) player;
+				if(player != null && sender == null) {
+					sender = (CommandSender) player;
+				}
 
 				sender.sendMessage(ChatColor.DARK_RED + "Convicted" + ChatColor.RESET + ": " + ChatColor.AQUA + found.getOffender());
 				sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
@@ -126,8 +128,6 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			if(player == null) {
 				plugin.getLogger().warning("Could not notify offender " + offenderName + " of charge!");
 			} else {
-				sender = (CommandSender) player;
-
 				player.sendMessage(ChatColor.DARK_RED + "Convicted" + ChatColor.GOLD + " by " + ChatColor.AQUA + sender.getName() + ChatColor.GOLD + " of " + ChatColor.GRAY + found.getChargeShort());
 				player.sendMessage(ChatColor.GOLD + "Filed under Charge " + ChatColor.RESET + "#" + found.getChargeId());
 			}
@@ -150,7 +150,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			return true;
 		}
 
-		CommandSender sender;
+		CommandSender sender = null;
 		// Hard code console check?
 		if(officialName.equals("CONSOLE")) {
 			sender = plugin.getServer().getConsoleSender();
@@ -159,10 +159,12 @@ public class SimpleRapsheetManager implements RapsheetManager {
 		Player player = plugin.getServer().getPlayer(officialName);
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
-			if(player == null) {
+			if(player == null && sender == null) {
 				plugin.getLogger().warning("Could not notify official " + officialName + " of charge!");
 			} else {
-				sender = (CommandSender) player;
+				if(player != null && sender == null) {
+					sender = (CommandSender) player;
+				}
 
 				sender.sendMessage(ChatColor.LIGHT_PURPLE + "Pardoned" + ChatColor.RESET + ": " + ChatColor.AQUA + found.getOffender());
 				sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
@@ -174,8 +176,6 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			if(player == null) {
 				plugin.getLogger().warning("Could not notify offender " + offenderName + " of charge!");
 			} else {
-				sender = (CommandSender) player;
-
 				player.sendMessage(ChatColor.LIGHT_PURPLE + "Pardoned" + ChatColor.GOLD + " by " + ChatColor.AQUA + sender.getName() + ChatColor.GOLD + " of " + ChatColor.GRAY + found.getChargeShort());
 				player.sendMessage(ChatColor.GOLD + "Filed under Charge " + ChatColor.RESET + "#" + found.getChargeId());
 			}
@@ -198,7 +198,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			return true;
 		}
 
-		CommandSender sender;
+		CommandSender sender = null;
 		// Hard code console check?
 		if(officialName.equals("CONSOLE")) {
 			sender = plugin.getServer().getConsoleSender();
@@ -207,10 +207,12 @@ public class SimpleRapsheetManager implements RapsheetManager {
 		Player player = plugin.getServer().getPlayer(officialName);
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
-			if(player == null) {
+			if(player == null && sender == null) {
 				plugin.getLogger().warning("Could not notify official " + officialName + " of charge!");
 			} else {
-				sender = (CommandSender) player;
+				if(player != null && sender == null) {
+					sender = (CommandSender) player;
+				}
 
 				sender.sendMessage(ChatColor.GRAY + "Sealed " + ChatColor.GOLD + "charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
 			}
@@ -220,8 +222,6 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			if(player == null) {
 				plugin.getLogger().warning("Could not notify offender " + offenderName + " of charge!");
 			} else {
-				sender = (CommandSender) player;
-
 				player.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " has been " + ChatColor.GRAY + "sealed" + ChatColor.GOLD + " by " + ChatColor.AQUA + sender.getName());
 			}
 		}
@@ -243,7 +243,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			return true;
 		}
 
-		CommandSender sender;
+		CommandSender sender = null;
 		// Hard code console check?
 		if(officialName.equals("CONSOLE")) {
 			sender = plugin.getServer().getConsoleSender();
@@ -252,10 +252,12 @@ public class SimpleRapsheetManager implements RapsheetManager {
 		Player player = plugin.getServer().getPlayer(officialName);
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
-			if(player == null) {
+			if(player == null && sender == null) {
 				plugin.getLogger().warning("Could not notify official " + officialName + " of charge!");
 			} else {
-				sender = (CommandSender) player;
+				if(player != null && sender == null) {
+					sender = (CommandSender) player;
+				}
 
 				sender.sendMessage(ChatColor.GRAY + "Unsealed " + ChatColor.GOLD + "charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
 			}
@@ -265,8 +267,6 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			if(player == null) {
 				plugin.getLogger().warning("Could not notify offender " + offenderName + " of charge!");
 			} else {
-				sender = (CommandSender) player;
-
 				player.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " has been " + ChatColor.GRAY + "unsealed" + ChatColor.GOLD + " by " + ChatColor.AQUA + sender.getName());
 			}
 		}
@@ -286,7 +286,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			return true;
 		}
 
-		CommandSender sender;
+		CommandSender sender = null;
 		// Hard code console check?
 		if(officialName.equals("CONSOLE")) {
 			sender = plugin.getServer().getConsoleSender();
@@ -295,10 +295,12 @@ public class SimpleRapsheetManager implements RapsheetManager {
 		Player player = plugin.getServer().getPlayer(officialName);
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
-			if(player == null) {
+			if(player == null && sender == null) {
 				plugin.getLogger().warning("Could not notify official " + officialName + " of charge!");
 			} else {
-				sender = (CommandSender) player;
+				if(player != null && sender == null) {
+					sender = (CommandSender) player;
+				}
 
 				sender.sendMessage(ChatColor.GRAY + "Expunged " + ChatColor.GOLD + "charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
 			}
@@ -308,8 +310,6 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			if(player == null) {
 				plugin.getLogger().warning("Could not notify offender " + offenderName + " of charge!");
 			} else {
-				sender = (CommandSender) player;
-
 				player.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " has been " + ChatColor.GRAY + "expunged" + ChatColor.GOLD + " by " + ChatColor.AQUA + sender.getName());
 			}
 		}
