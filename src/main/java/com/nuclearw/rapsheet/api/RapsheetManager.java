@@ -9,7 +9,7 @@ public interface RapsheetManager {
 
 	public Record getCharge(String playerName, int chargeId);
 
-	public int chargePlayer(String offenderName, String officialName, String shortDesciption, String longDescription, NotifyChanges notify);
+	public int chargePlayer(String offenderName, String officialName, String shortDescription, String longDescription, NotifyChanges notify);
 
 	public boolean convictPlayer(String offenderName, String officialName, int chargeId, NotifyChanges notify);
 

@@ -27,7 +27,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 	}
 
 	@Override
-	public int chargePlayer(String offenderName, String officialName, String shortDesciption, String longDescription, NotifyChanges notify) {
+	public int chargePlayer(String offenderName, String officialName, String shortDescription, String longDescription, NotifyChanges notify) {
 		int newChargeId = 1;
 
 		// I do not like the way this is done
@@ -41,7 +41,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 		record.setChargeId(newChargeId);
 		record.setOffender(offenderName);
 		record.setOfficial(officialName);
-		record.setChargeShort(shortDesciption);
+		record.setChargeShort(shortDescription);
 		record.setChargeLong(longDescription);
 		record.setTime(System.currentTimeMillis());
 		record.setSealed(false);
@@ -70,7 +70,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 				}
 
 				sender.sendMessage(ChatColor.GOLD + "Charged" + ChatColor.RESET + ": " + ChatColor.AQUA + offenderName);
-				sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + newChargeId + ChatColor.GOLD + " - " + ChatColor.AQUA + shortDesciption);
+				sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + newChargeId + ChatColor.GOLD + " - " + ChatColor.AQUA + shortDescription);
 				sender.sendMessage(ChatColor.GOLD + "Report" + ChatColor.RESET + ": " + ChatColor.GRAY + longDescription);
 			}
 		}
@@ -79,7 +79,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			if(player == null) {
 				plugin.getLogger().warning("Could not notify offender " + offenderName + " of charge!");
 			} else {
-				player.sendMessage(ChatColor.GOLD + "Charged by " + ChatColor.AQUA + sender.getName() + ChatColor.GOLD + " of " + ChatColor.GRAY + shortDesciption);
+				player.sendMessage(ChatColor.GOLD + "Charged by " + ChatColor.AQUA + sender.getName() + ChatColor.GOLD + " of " + ChatColor.GRAY + shortDescription);
 				player.sendMessage(ChatColor.GOLD + "Filed under Charge " + ChatColor.RESET + "#" + newChargeId);
 			}
 		}
