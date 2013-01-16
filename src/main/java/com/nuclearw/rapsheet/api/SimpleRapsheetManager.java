@@ -60,7 +60,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			sender = plugin.getServer().getConsoleSender();
 		}
 
-		Player player = plugin.getServer().getPlayer(officialName);
+		Player player = plugin.getServer().getPlayer(offenderName);
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
 			if(player == null && sender == null) {
@@ -108,7 +108,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			sender = plugin.getServer().getConsoleSender();
 		}
 
-		Player player = plugin.getServer().getPlayer(officialName);
+		Player player = plugin.getServer().getPlayer(offenderName);
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
 			if(player == null && sender == null) {
@@ -156,7 +156,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			sender = plugin.getServer().getConsoleSender();
 		}
 
-		Player player = plugin.getServer().getPlayer(officialName);
+		Player player = plugin.getServer().getPlayer(offenderName);
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
 			if(player == null && sender == null) {
@@ -204,7 +204,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			sender = plugin.getServer().getConsoleSender();
 		}
 
-		Player player = plugin.getServer().getPlayer(officialName);
+		Player player = plugin.getServer().getPlayer(offenderName);
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
 			if(player == null && sender == null) {
@@ -249,7 +249,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			sender = plugin.getServer().getConsoleSender();
 		}
 
-		Player player = plugin.getServer().getPlayer(officialName);
+		Player player = plugin.getServer().getPlayer(offenderName);
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
 			if(player == null && sender == null) {
@@ -292,7 +292,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			sender = plugin.getServer().getConsoleSender();
 		}
 
-		Player player = plugin.getServer().getPlayer(officialName);
+		Player player = plugin.getServer().getPlayer(offenderName);
 
 		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
 			if(player == null && sender == null) {
