@@ -4,11 +4,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import com.nuclearw.rapsheet.Rapsheet;
 import com.nuclearw.rapsheet.Record;
 import com.nuclearw.rapsheet.RecordState;
+import com.nuclearw.rapsheet.api.NotifyChanges;
 
 public class PardonCommandExecutor extends RapsheetCommand implements CommandExecutor {
 	public PardonCommandExecutor(Rapsheet plugin) {
@@ -51,25 +51,11 @@ public class PardonCommandExecutor extends RapsheetCommand implements CommandExe
 			return true;
 		}
 
-		boolean success = Rapsheet.getManager().pardonPlayer(target, chargeId);
+		boolean success = Rapsheet.getManager().pardonPlayer(target, sender.getName(), chargeId, NotifyChanges.BOTH);
 
 		if(!success) {
 			plugin.getLogger().severe("Error trying to pardon player " + target + " of chargeId: " + chargeId);
 		}
-
-		sender.sendMessage(ChatColor.LIGHT_PURPLE + "Pardoned" + ChatColor.RESET + ": " + ChatColor.AQUA + found.getOffender());
-		sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
-		sender.sendMessage(ChatColor.GOLD + "Report" + ChatColor.RESET + ": " + ChatColor.GRAY + found.getChargeLong());
-
-		// Notify player if they are online
-		Player player = plugin.getServer().getPlayer(target);
-
-		if(player == null) {
-			return true;
-		}
-
-		player.sendMessage(ChatColor.LIGHT_PURPLE + "Pardoned" + ChatColor.GOLD + " by " + ChatColor.AQUA + sender.getName() + ChatColor.GOLD + " of " + ChatColor.GRAY + found.getChargeShort());
-		player.sendMessage(ChatColor.GOLD + "Filed under Charge " + ChatColor.RESET + "#" + found.getChargeId());
 
 		return true;
 	}

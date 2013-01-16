@@ -4,10 +4,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import com.nuclearw.rapsheet.Rapsheet;
 import com.nuclearw.rapsheet.Record;
+import com.nuclearw.rapsheet.api.NotifyChanges;
 
 public class SealCommandExecutor extends RapsheetCommand implements CommandExecutor {
 	public SealCommandExecutor(Rapsheet plugin) {
@@ -45,22 +45,11 @@ public class SealCommandExecutor extends RapsheetCommand implements CommandExecu
 			return true;
 		}
 
-		boolean success = Rapsheet.getManager().sealPlayerCharge(target, chargeId);
+		boolean success = Rapsheet.getManager().sealPlayerCharge(target, sender.getName(), chargeId, NotifyChanges.BOTH);
 
 		if(!success) {
 			plugin.getLogger().severe("Error trying to seal player " + target + "'s chargeId: " + chargeId);
 		}
-
-		sender.sendMessage(ChatColor.GRAY + "Sealed " + ChatColor.GOLD + "charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
-
-		// Notify player if they are online
-		Player player = plugin.getServer().getPlayer(target);
-
-		if(player == null) {
-			return true;
-		}
-
-		player.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " has been " + ChatColor.GRAY + "sealed" + ChatColor.GOLD + " by " + ChatColor.AQUA + sender.getName());
 
 		return true;
 	}

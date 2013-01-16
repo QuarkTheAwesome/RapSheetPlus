@@ -4,10 +4,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import com.nuclearw.rapsheet.Rapsheet;
 import com.nuclearw.rapsheet.Record;
+import com.nuclearw.rapsheet.api.NotifyChanges;
 
 public class UnsealCommandExecutor extends RapsheetCommand implements CommandExecutor {
 	public UnsealCommandExecutor(Rapsheet plugin) {
@@ -45,22 +45,11 @@ public class UnsealCommandExecutor extends RapsheetCommand implements CommandExe
 			return true;
 		}
 
-		boolean success = Rapsheet.getManager().unsealPlayerCharge(target, chargeId);
+		boolean success = Rapsheet.getManager().unsealPlayerCharge(target, sender.getName(), chargeId, NotifyChanges.BOTH);
 
 		if(!success) {
 			plugin.getLogger().severe("Error trying to unseal player " + target + "'s chargeId: " + chargeId);
 		}
-
-		sender.sendMessage(ChatColor.GRAY + "Unsealed " + ChatColor.GOLD + "charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
-
-		// Notify player if they are online
-		Player player = plugin.getServer().getPlayer(target);
-
-		if(player == null) {
-			return true;
-		}
-
-		player.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " has been " + ChatColor.GRAY + "unsealed" + ChatColor.GOLD + " by " + ChatColor.AQUA + sender.getName());
 
 		return true;
 	}

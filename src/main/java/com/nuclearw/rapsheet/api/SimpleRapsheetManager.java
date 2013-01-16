@@ -2,6 +2,10 @@ package com.nuclearw.rapsheet.api;
 
 import java.util.List;
 
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
 import com.nuclearw.rapsheet.Rapsheet;
 import com.nuclearw.rapsheet.Record;
 import com.nuclearw.rapsheet.RecordState;
@@ -24,7 +28,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 	}
 
 	@Override
-	public int chargePlayer(String offenderName, String officialName, String shortDesciption, String longDescription) {
+	public int chargePlayer(String offenderName, String officialName, String shortDesciption, String longDescription, NotifyChanges notify) {
 		int newChargeId = 1;
 
 		// I do not like the way this is done
@@ -46,11 +50,46 @@ public class SimpleRapsheetManager implements RapsheetManager {
 
 		plugin.getDatabase().save(record);
 
+		if(notify == NotifyChanges.NONE) {
+			return newChargeId;
+		}
+
+		CommandSender sender;
+		// Hard code console check?
+		if(officialName.equals("CONSOLE")) {
+			sender = plugin.getServer().getConsoleSender();
+		}
+
+		Player player = plugin.getServer().getPlayer(officialName);
+
+		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
+			if(player == null) {
+				plugin.getLogger().warning("Could not notify official " + officialName + " of charge!");
+			} else {
+				sender = (CommandSender) player;
+
+				sender.sendMessage(ChatColor.GOLD + "Charged" + ChatColor.RESET + ": " + ChatColor.AQUA + offenderName);
+				sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + newChargeId + ChatColor.GOLD + " - " + ChatColor.AQUA + shortDesciption);
+				sender.sendMessage(ChatColor.GOLD + "Report" + ChatColor.RESET + ": " + ChatColor.GRAY + longDescription);
+			}
+		}
+
+		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFENDER) {
+			if(player == null) {
+				plugin.getLogger().warning("Could not notify offender " + officialName + " of charge!");
+			} else {
+				sender = (CommandSender) player;
+
+				sender.sendMessage(ChatColor.GOLD + "Charged by " + ChatColor.AQUA + sender.getName() + ChatColor.GOLD + " of " + ChatColor.GRAY + shortDesciption);
+				sender.sendMessage(ChatColor.GOLD + "Filed under Charge " + ChatColor.RESET + "#" + newChargeId);
+			}
+		}
+
 		return newChargeId;
 	}
 
 	@Override
-	public boolean convictPlayer(String offenderName, int chargeId) {
+	public boolean convictPlayer(String offenderName, String officialName, int chargeId, NotifyChanges notify) {
 		Record found = getCharge(offenderName, chargeId);
 
 		if(found == null) return false;
@@ -59,11 +98,46 @@ public class SimpleRapsheetManager implements RapsheetManager {
 
 		plugin.getDatabase().update(found);
 
+		if(notify == NotifyChanges.NONE) {
+			return true;
+		}
+
+		CommandSender sender;
+		// Hard code console check?
+		if(officialName.equals("CONSOLE")) {
+			sender = plugin.getServer().getConsoleSender();
+		}
+
+		Player player = plugin.getServer().getPlayer(officialName);
+
+		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
+			if(player == null) {
+				plugin.getLogger().warning("Could not notify official " + officialName + " of charge!");
+			} else {
+				sender = (CommandSender) player;
+
+				sender.sendMessage(ChatColor.DARK_RED + "Convicted" + ChatColor.RESET + ": " + ChatColor.AQUA + found.getOffender());
+				sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
+				sender.sendMessage(ChatColor.GOLD + "Report" + ChatColor.RESET + ": " + ChatColor.GRAY + found.getChargeLong());
+			}
+		}
+
+		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFENDER) {
+			if(player == null) {
+				plugin.getLogger().warning("Could not notify offender " + officialName + " of charge!");
+			} else {
+				sender = (CommandSender) player;
+
+				player.sendMessage(ChatColor.DARK_RED + "Convicted" + ChatColor.GOLD + " by " + ChatColor.AQUA + sender.getName() + ChatColor.GOLD + " of " + ChatColor.GRAY + found.getChargeShort());
+				player.sendMessage(ChatColor.GOLD + "Filed under Charge " + ChatColor.RESET + "#" + found.getChargeId());
+			}
+		}
+
 		return true;
 	}
 
 	@Override
-	public boolean pardonPlayer(String offenderName, int chargeId) {
+	public boolean pardonPlayer(String offenderName, String officialName, int chargeId, NotifyChanges notify) {
 		Record found = getCharge(offenderName, chargeId);
 
 		if(found == null) return false;
@@ -72,11 +146,46 @@ public class SimpleRapsheetManager implements RapsheetManager {
 
 		plugin.getDatabase().update(found);
 
+		if(notify == NotifyChanges.NONE) {
+			return true;
+		}
+
+		CommandSender sender;
+		// Hard code console check?
+		if(officialName.equals("CONSOLE")) {
+			sender = plugin.getServer().getConsoleSender();
+		}
+
+		Player player = plugin.getServer().getPlayer(officialName);
+
+		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
+			if(player == null) {
+				plugin.getLogger().warning("Could not notify official " + officialName + " of charge!");
+			} else {
+				sender = (CommandSender) player;
+
+				sender.sendMessage(ChatColor.LIGHT_PURPLE + "Pardoned" + ChatColor.RESET + ": " + ChatColor.AQUA + found.getOffender());
+				sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
+				sender.sendMessage(ChatColor.GOLD + "Report" + ChatColor.RESET + ": " + ChatColor.GRAY + found.getChargeLong());
+			}
+		}
+
+		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFENDER) {
+			if(player == null) {
+				plugin.getLogger().warning("Could not notify offender " + officialName + " of charge!");
+			} else {
+				sender = (CommandSender) player;
+
+				player.sendMessage(ChatColor.LIGHT_PURPLE + "Pardoned" + ChatColor.GOLD + " by " + ChatColor.AQUA + sender.getName() + ChatColor.GOLD + " of " + ChatColor.GRAY + found.getChargeShort());
+				player.sendMessage(ChatColor.GOLD + "Filed under Charge " + ChatColor.RESET + "#" + found.getChargeId());
+			}
+		}
+
 		return true;
 	}
 
 	@Override
-	public boolean sealPlayerCharge(String offenderName, int chargeId) {
+	public boolean sealPlayerCharge(String offenderName, String officialName, int chargeId, NotifyChanges notify) {
 		Record found = getCharge(offenderName, chargeId);
 
 		if(found == null) return false;
@@ -85,11 +194,43 @@ public class SimpleRapsheetManager implements RapsheetManager {
 
 		plugin.getDatabase().update(found);
 
+		if(notify == NotifyChanges.NONE) {
+			return true;
+		}
+
+		CommandSender sender;
+		// Hard code console check?
+		if(officialName.equals("CONSOLE")) {
+			sender = plugin.getServer().getConsoleSender();
+		}
+
+		Player player = plugin.getServer().getPlayer(officialName);
+
+		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
+			if(player == null) {
+				plugin.getLogger().warning("Could not notify official " + officialName + " of charge!");
+			} else {
+				sender = (CommandSender) player;
+
+				sender.sendMessage(ChatColor.GRAY + "Sealed " + ChatColor.GOLD + "charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
+			}
+		}
+
+		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFENDER) {
+			if(player == null) {
+				plugin.getLogger().warning("Could not notify offender " + officialName + " of charge!");
+			} else {
+				sender = (CommandSender) player;
+
+				player.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " has been " + ChatColor.GRAY + "sealed" + ChatColor.GOLD + " by " + ChatColor.AQUA + sender.getName());
+			}
+		}
+
 		return true;
 	}
 
 	@Override
-	public boolean unsealPlayerCharge(String offenderName, int chargeId) {
+	public boolean unsealPlayerCharge(String offenderName, String officialName, int chargeId, NotifyChanges notify) {
 		Record found = getCharge(offenderName, chargeId);
 
 		if(found == null) return false;
@@ -98,16 +239,80 @@ public class SimpleRapsheetManager implements RapsheetManager {
 
 		plugin.getDatabase().update(found);
 
+		if(notify == NotifyChanges.NONE) {
+			return true;
+		}
+
+		CommandSender sender;
+		// Hard code console check?
+		if(officialName.equals("CONSOLE")) {
+			sender = plugin.getServer().getConsoleSender();
+		}
+
+		Player player = plugin.getServer().getPlayer(officialName);
+
+		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
+			if(player == null) {
+				plugin.getLogger().warning("Could not notify official " + officialName + " of charge!");
+			} else {
+				sender = (CommandSender) player;
+
+				sender.sendMessage(ChatColor.GRAY + "Unsealed " + ChatColor.GOLD + "charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
+			}
+		}
+
+		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFENDER) {
+			if(player == null) {
+				plugin.getLogger().warning("Could not notify offender " + officialName + " of charge!");
+			} else {
+				sender = (CommandSender) player;
+
+				player.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " has been " + ChatColor.GRAY + "unsealed" + ChatColor.GOLD + " by " + ChatColor.AQUA + sender.getName());
+			}
+		}
+
 		return true;
 	}
 
 	@Override
-	public boolean expungePlayerCharge(String offenderName, int chargeId) {
+	public boolean expungePlayerCharge(String offenderName, String officialName, int chargeId, NotifyChanges notify) {
 		Record found = getCharge(offenderName, chargeId);
 
 		if(found == null) return false;
 
 		plugin.getDatabase().delete(found);
+
+		if(notify == NotifyChanges.NONE) {
+			return true;
+		}
+
+		CommandSender sender;
+		// Hard code console check?
+		if(officialName.equals("CONSOLE")) {
+			sender = plugin.getServer().getConsoleSender();
+		}
+
+		Player player = plugin.getServer().getPlayer(officialName);
+
+		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFICIAL) {
+			if(player == null) {
+				plugin.getLogger().warning("Could not notify official " + officialName + " of charge!");
+			} else {
+				sender = (CommandSender) player;
+
+				sender.sendMessage(ChatColor.GRAY + "Expunged " + ChatColor.GOLD + "charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
+			}
+		}
+
+		if(notify == NotifyChanges.BOTH || notify == NotifyChanges.OFFENDER) {
+			if(player == null) {
+				plugin.getLogger().warning("Could not notify offender " + officialName + " of charge!");
+			} else {
+				sender = (CommandSender) player;
+
+				player.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " has been " + ChatColor.GRAY + "expunged" + ChatColor.GOLD + " by " + ChatColor.AQUA + sender.getName());
+			}
+		}
 
 		return true;
 	}
