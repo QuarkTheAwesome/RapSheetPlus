@@ -10,6 +10,7 @@ import com.nuclearw.rapsheet.api.NotifyChanges;
 import com.nuclearw.rapsheet.api.RapsheetManager;
 import com.nuclearw.rapsheet.api.events.RapsheetChargeEvent;
 import com.nuclearw.rapsheet.api.events.RapsheetConvictEvent;
+import com.nuclearw.rapsheet.api.events.RapsheetExpungeEvent;
 import com.nuclearw.rapsheet.api.events.RapsheetPardonEvent;
 import com.nuclearw.rapsheet.api.events.RapsheetSealChangeEvent;
 
@@ -297,6 +298,10 @@ public class SimpleRapsheetManager implements RapsheetManager {
 		Record found = getCharge(offenderName, chargeId);
 
 		if(found == null) return false;
+
+		// This event before we delete it so as to let plugins actually do something with the knowledge it's being deleted before we delete it.
+		RapsheetExpungeEvent expungeEvent = new RapsheetExpungeEvent(offenderName, officialName, chargeId);
+		plugin.getServer().getPluginManager().callEvent(expungeEvent);
 
 		plugin.getDatabase().delete(found);
 
