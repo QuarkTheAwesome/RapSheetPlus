@@ -8,10 +8,10 @@ import org.bukkit.entity.Player;
 
 import com.nuclearw.rapsheet.api.NotifyChanges;
 import com.nuclearw.rapsheet.api.RapsheetManager;
-import com.nuclearw.rapsheet.api.RapsheetPardonEvent;
-import com.nuclearw.rapsheet.api.RapsheetSealChangeEvent;
 import com.nuclearw.rapsheet.api.events.RapsheetChargeEvent;
 import com.nuclearw.rapsheet.api.events.RapsheetConvictEvent;
+import com.nuclearw.rapsheet.api.events.RapsheetPardonEvent;
+import com.nuclearw.rapsheet.api.events.RapsheetSealChangeEvent;
 
 public class SimpleRapsheetManager implements RapsheetManager {
 	private Rapsheet plugin;

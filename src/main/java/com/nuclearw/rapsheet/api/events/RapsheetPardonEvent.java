@@ -1,6 +1,5 @@
-package com.nuclearw.rapsheet.api;
+package com.nuclearw.rapsheet.api.events;
 
-import com.nuclearw.rapsheet.api.events.RapsheetEvent;
 
 public class RapsheetPardonEvent extends RapsheetEvent {
 	public RapsheetPardonEvent(String offenderName, String officialName, int chargeId) {

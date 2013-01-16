@@ -1,6 +1,5 @@
-package com.nuclearw.rapsheet.api;
+package com.nuclearw.rapsheet.api.events;
 
-import com.nuclearw.rapsheet.api.events.RapsheetEvent;
 
 public class RapsheetSealChangeEvent extends RapsheetEvent {
 	private final boolean sealing;
