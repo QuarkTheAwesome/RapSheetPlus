@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import com.nuclearw.rapsheet.api.NotifyChanges;
 import com.nuclearw.rapsheet.api.RapsheetManager;
 import com.nuclearw.rapsheet.api.RapsheetPardonEvent;
+import com.nuclearw.rapsheet.api.RapsheetSealChangeEvent;
 import com.nuclearw.rapsheet.api.events.RapsheetChargeEvent;
 import com.nuclearw.rapsheet.api.events.RapsheetConvictEvent;
 
@@ -205,6 +206,9 @@ public class SimpleRapsheetManager implements RapsheetManager {
 
 		plugin.getDatabase().update(found);
 
+		RapsheetSealChangeEvent sealChangeEvent = new RapsheetSealChangeEvent(offenderName, officialName, chargeId, true);
+		plugin.getServer().getPluginManager().callEvent(sealChangeEvent);
+
 		if(notify == NotifyChanges.NONE) {
 			return true;
 		}
@@ -249,6 +253,9 @@ public class SimpleRapsheetManager implements RapsheetManager {
 		found.setSealed(false);
 
 		plugin.getDatabase().update(found);
+
+		RapsheetSealChangeEvent sealChangeEvent = new RapsheetSealChangeEvent(offenderName, officialName, chargeId, false);
+		plugin.getServer().getPluginManager().callEvent(sealChangeEvent);
 
 		if(notify == NotifyChanges.NONE) {
 			return true;
