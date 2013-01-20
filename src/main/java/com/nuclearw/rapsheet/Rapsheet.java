@@ -33,15 +33,6 @@ public class Rapsheet extends JavaPlugin {
 		getLogger().info("Finished unloading " + getDescription().getFullName());
 	}
 
-	private void initDatabase() {
-		try {
-			getDatabase().find(Record.class).findRowCount();
-		} catch (PersistenceException ex) {
-			getLogger().info("Initializing database");
-			this.installDDL();
-		}
-	}
-
 	@Override
 	public List<Class<?>> getDatabaseClasses() {
 		List<Class<?>> list = new ArrayList<Class<?>>();
@@ -51,6 +42,15 @@ public class Rapsheet extends JavaPlugin {
 
 	public static RapsheetManager getManager() {
 		return manager;
+	}
+
+	private void initDatabase() {
+		try {
+			getDatabase().find(Record.class).findRowCount();
+		} catch (PersistenceException ex) {
+			getLogger().info("Initializing database");
+			this.installDDL();
+		}
 	}
 
 	private void metrics() {
