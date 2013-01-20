@@ -19,6 +19,7 @@
                 <directory>${basedir}/src/main/resources/</directory>
                 <includes>
                     <include>*.yml</include>
+                    <include>*.properties</include>
                 </includes>
             </resource>
         </resources>

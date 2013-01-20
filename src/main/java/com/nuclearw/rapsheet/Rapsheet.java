@@ -11,13 +11,25 @@ import org.mcstats.Metrics;
 
 import com.nuclearw.rapsheet.api.RapsheetManager;
 import com.nuclearw.rapsheet.commands.BaseCommandExecutor;
+import com.nuclearw.rapsheet.locale.LocaleManager;
 
 public class Rapsheet extends JavaPlugin {
 	private static RapsheetManager manager;
+	private static LocaleManager locale;
 
 	@Override
 	public void onEnable() {
 		initDatabase();
+
+		try {
+			locale = new LocaleManager(this);
+		} catch (IOException e) {
+			// We could not load locale, this is an error we cannot get around.
+			getLogger().severe("Could not load Locale!  This is a non-recoverable error!");
+			e.printStackTrace();
+			getPluginLoader().disablePlugin(this);
+			return;
+		}
 
 		manager = new SimpleRapsheetManager(this);
 
@@ -42,6 +54,10 @@ public class Rapsheet extends JavaPlugin {
 
 	public static RapsheetManager getManager() {
 		return manager;
+	}
+
+	public LocaleManager getLocale() {
+		return locale;
 	}
 
 	private void initDatabase() {

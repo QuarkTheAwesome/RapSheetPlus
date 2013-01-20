@@ -13,12 +13,15 @@ import com.nuclearw.rapsheet.api.events.RapsheetConvictEvent;
 import com.nuclearw.rapsheet.api.events.RapsheetExpungeEvent;
 import com.nuclearw.rapsheet.api.events.RapsheetPardonEvent;
 import com.nuclearw.rapsheet.api.events.RapsheetSealChangeEvent;
+import com.nuclearw.rapsheet.locale.LocaleManager;
 
 public class SimpleRapsheetManager implements RapsheetManager {
 	private Rapsheet plugin;
+	private LocaleManager locale;
 
 	public SimpleRapsheetManager(Rapsheet plugin) {
 		this.plugin = plugin;
+		this.locale = plugin.getLocale();
 	}
 
 	@Override
@@ -88,7 +91,7 @@ public class SimpleRapsheetManager implements RapsheetManager {
 				plugin.getLogger().warning("Could not notify offender " + offenderName + " of charge!");
 			} else {
 				player.sendMessage(ChatColor.GOLD + "Charged by " + ChatColor.AQUA + sender.getName() + ChatColor.GOLD + " of " + ChatColor.GRAY + shortDescription);
-				player.sendMessage(ChatColor.GOLD + "Filed under Charge " + ChatColor.RESET + "#" + newChargeId);
+				player.sendMessage(locale.getString("filed-under", new Object[] {newChargeId}));
 			}
 		}
 
