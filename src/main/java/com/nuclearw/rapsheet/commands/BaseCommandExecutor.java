@@ -17,6 +17,7 @@ public class BaseCommandExecutor extends RapsheetCommand implements CommandExecu
 	private CommandExecutor sealCommand    = new SealCommandExecutor(plugin);
 	private CommandExecutor unsealCommand  = new UnsealCommandExecutor(plugin);
 	private CommandExecutor expungeCommand = new ExpungeCommandExecutor(plugin);
+	private CommandExecutor meCommand = new MeCommandExecutor(plugin);
 
 	public BaseCommandExecutor(Rapsheet plugin) {
 		super(plugin);
@@ -25,11 +26,10 @@ public class BaseCommandExecutor extends RapsheetCommand implements CommandExecu
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(args.length == 0) {
-			printHelp(sender, label);
+			printHelp(sender, label, "1");
 			return true;
 		}
-
-		if(args[0].equalsIgnoreCase("lookup")) {
+			if(args[0].equalsIgnoreCase("lookup")) {
 			if(!sender.hasPermission("rapsheet.lookup")) {
 				sender.sendMessage(NO_PERMISSION);
 				return true;
@@ -47,6 +47,14 @@ public class BaseCommandExecutor extends RapsheetCommand implements CommandExecu
 				return true;
 			}
 			convictCommand.onCommand(sender, cmd, label, args);
+		} else if(args[0].equalsIgnoreCase("2")) {
+			printHelp(sender, label, "2");
+		} else if(args[0].equalsIgnoreCase("version")) {
+			sender.sendMessage(ChatColor.GOLD + "----- " + ChatColor.AQUA + "RapSheetPlus 0.2" + ChatColor.GOLD + " -----");
+			sender.sendMessage(ChatColor.GOLD + "Original plugin by " + ChatColor.AQUA + "NuclearW" + ChatColor.GOLD + ". Original available here:");
+			sender.sendMessage(ChatColor.GRAY + "https://github.com/NuclearW/Rapsheet");
+			sender.sendMessage(ChatColor.GOLD + "'Plus' version by " + ChatColor.AQUA + "Quark.");
+			sender.sendMessage(ChatColor.GRAY + "I'll upload it to BukkitDev later.");
 		} else if(args[0].equalsIgnoreCase("pardon")) {
 			if(!sender.hasPermission("rapsheet.pardon")) {
 				sender.sendMessage(NO_PERMISSION);
@@ -59,6 +67,12 @@ public class BaseCommandExecutor extends RapsheetCommand implements CommandExecu
 				return true;
 			}
 			sealCommand.onCommand(sender, cmd, label, args);
+		} else if(args[0].equalsIgnoreCase("me")) {
+			if(!sender.hasPermission("rapsheet.seal")) {
+				sender.sendMessage(NO_PERMISSION);
+				return true;
+			}
+			meCommand.onCommand(sender, cmd, label, args);
 		} else if(args[0].equalsIgnoreCase("unseal")) {
 			if(!sender.hasPermission("rapsheet.seal")) {
 				sender.sendMessage(NO_PERMISSION);
@@ -72,9 +86,8 @@ public class BaseCommandExecutor extends RapsheetCommand implements CommandExecu
 			}
 			expungeCommand.onCommand(sender, cmd, label, args);
 		} else {
-			printHelp(sender, label);
+			printHelp(sender, label, "1");
 		}
-
 		return true;
 	}
 }
