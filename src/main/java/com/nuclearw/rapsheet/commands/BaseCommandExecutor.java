@@ -53,8 +53,8 @@ public class BaseCommandExecutor extends RapsheetCommand implements CommandExecu
 			sender.sendMessage(ChatColor.GOLD + "----- " + ChatColor.AQUA + "RapSheetPlus 0.2" + ChatColor.GOLD + " -----");
 			sender.sendMessage(ChatColor.GOLD + "Original plugin by " + ChatColor.AQUA + "NuclearW" + ChatColor.GOLD + ". Original available here:");
 			sender.sendMessage(ChatColor.GRAY + "https://github.com/NuclearW/Rapsheet");
-			sender.sendMessage(ChatColor.GOLD + "'Plus' version by " + ChatColor.AQUA + "Quark.");
-			sender.sendMessage(ChatColor.GRAY + "I'll upload it to BukkitDev later.");
+			sender.sendMessage(ChatColor.GOLD + "'Plus' version by " + ChatColor.AQUA + "Quark" + ChatColor.GOLD + ". Available here:");
+			sender.sendMessage(ChatColor.GRAY + "https://github.com/QuarkTheAwesome/RapSheetPlus");
 		} else if(args[0].equalsIgnoreCase("pardon")) {
 			if(!sender.hasPermission("rapsheet.pardon")) {
 				sender.sendMessage(NO_PERMISSION);
