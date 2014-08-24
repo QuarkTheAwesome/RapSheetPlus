@@ -1,13 +1,13 @@
-name: Rapsheet
+name: RapSheetPlus
 main: com.nuclearw.rapsheet.Rapsheet
 version: ${project.version}
-author: NuclearW
-description: Rapsheet lets you charge players of crimes, and then look them up later.
+author: NuclearW and Quark
+description: Rapsheet lets you charge players of crimes, and then look them up later. Plus version by Quark.
 database: true
 commands:
     rapsheet:
-        description: Rapsheet root command
-        aliases: rs
+        description: Rapsheet command. Run for help.
+        aliases: rap
         usage: |
             /<command>
 permissions:
@@ -21,12 +21,16 @@ permissions:
             rapsheet.seal: true
             rapsheet.viewsealed: true
             rapsheet.expunge: true
+            rapsheet.lookupme: true
     rapsheet.lookup:
         description: Allows you to do a lookup
-        default: true
+        default: op
     rapsheet.charge:
         description: Allows you to charge a player
         default: op
+    rapsheet.lookupme:
+        description: Allows you to lookup yourself, and only yourself.
+        default: true
     rapsheet.convict:
         description: Allows you to convict a player
         default: op
