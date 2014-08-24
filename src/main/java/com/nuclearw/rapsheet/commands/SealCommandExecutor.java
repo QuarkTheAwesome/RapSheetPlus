@@ -18,7 +18,8 @@ public class SealCommandExecutor extends RapsheetCommand implements CommandExecu
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(args.length != 3) {
 			printArgsError(args);
-			printHelp(sender, label);
+			sender.sendMessage(ChatColor.GOLD + "/" + label + " seal <player> <charge#>: " + ChatColor.WHITE + "Seal a charge. Only those with rapsheet.seal can view them.");
+			sender.sendMessage(ChatColor.GOLD + "/" + label + " unseal <player> <charge#>: " + ChatColor.WHITE + "Unseal a charge.");
 			return true;
 		}
 
@@ -29,7 +30,8 @@ public class SealCommandExecutor extends RapsheetCommand implements CommandExecu
 		try {
 			chargeId = Integer.valueOf(args[2]);
 		} catch (NumberFormatException ex) {
-			printHelp(sender, label);
+			sender.sendMessage(ChatColor.GOLD + "/" + label + " seal <player> <charge#>: " + ChatColor.WHITE + "Seal a charge. Only those with rapsheet.seal can view them.");
+			sender.sendMessage(ChatColor.GOLD + "/" + label + " unseal <player> <charge#>: " + ChatColor.WHITE + "Unseal a charge.");
 			return true;
 		}
 

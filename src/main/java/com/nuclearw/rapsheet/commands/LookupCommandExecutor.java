@@ -21,7 +21,8 @@ public class LookupCommandExecutor extends RapsheetCommand implements CommandExe
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(args.length < 2) {
 			printArgsError(args);
-			printHelp(sender, label);
+			sender.sendMessage(ChatColor.GOLD + "/" + label + " lookup <player>: " + ChatColor.WHITE + "Look up a player's records.");
+			sender.sendMessage(ChatColor.GOLD + "/" + label + " lookup <player> <charge#>: " + ChatColor.WHITE + "Look at a specific charge on a player.");
 			return true;
 		}
 
@@ -87,7 +88,8 @@ public class LookupCommandExecutor extends RapsheetCommand implements CommandExe
 			try {
 				chargeId = Integer.valueOf(args[2]);
 			} catch (NumberFormatException ex) {
-				printHelp(sender, label);
+				sender.sendMessage(ChatColor.GOLD + "/" + label + " lookup <player>: " + ChatColor.WHITE + "Look up a player's records.");
+				sender.sendMessage(ChatColor.GOLD + "/" + label + " lookup <player> <charge#>: " + ChatColor.WHITE + "Look at a specific charge on a player.");
 				return true;
 			}
 

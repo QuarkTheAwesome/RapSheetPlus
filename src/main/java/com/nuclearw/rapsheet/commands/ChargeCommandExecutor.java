@@ -1,5 +1,6 @@
 package com.nuclearw.rapsheet.commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,7 +17,7 @@ public class ChargeCommandExecutor extends RapsheetCommand implements CommandExe
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(args.length < 4) {
 			printArgsError(args);
-			printHelp(sender, label);
+			sender.sendMessage(ChatColor.GOLD + "/" + label + " charge <player> <reason> <description ...>: " + ChatColor.WHITE + "Charge a player of a crime. Reason is a one-word crime, description goes more into it.");
 			return true;
 		}
 

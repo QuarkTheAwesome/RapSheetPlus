@@ -1,5 +1,6 @@
 package com.nuclearw.rapsheet.commands;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,7 +18,7 @@ public class ExpungeCommandExecutor extends RapsheetCommand implements CommandEx
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(args.length != 3) {
 			printArgsError(args);
-			printHelp(sender, label);
+			sender.sendMessage(ChatColor.GOLD + "/" + label + " expunge <player> <charge#>: " + ChatColor.WHITE + "Expunge a charge against a player. " + ChatColor.RED + "This cannot be undone.");
 			return true;
 		}
 
@@ -28,7 +29,7 @@ public class ExpungeCommandExecutor extends RapsheetCommand implements CommandEx
 		try {
 			chargeId = Integer.valueOf(args[2]);
 		} catch (NumberFormatException ex) {
-			printHelp(sender, label);
+			sender.sendMessage(ChatColor.GOLD + "/" + label + " expunge <player> <charge#>: " + ChatColor.WHITE + "Expunge a charge against a player. " + ChatColor.RED + "This cannot be undone.");
 			return true;
 		}
 

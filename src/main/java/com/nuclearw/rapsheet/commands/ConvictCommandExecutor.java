@@ -19,7 +19,7 @@ public class ConvictCommandExecutor extends RapsheetCommand implements CommandEx
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(args.length != 3) {
 			printArgsError(args);
-			printHelp(sender, label);
+			sender.sendMessage(ChatColor.GOLD + "/" + label + " convict <player> <charge#>: " + ChatColor.WHITE + "Convict (confirm) a charge.");
 			return true;
 		}
 
@@ -30,7 +30,7 @@ public class ConvictCommandExecutor extends RapsheetCommand implements CommandEx
 		try {
 			chargeId = Integer.valueOf(args[2]);
 		} catch (NumberFormatException ex) {
-			printHelp(sender, label);
+			sender.sendMessage(ChatColor.GOLD + "/" + label + " convict <player> <charge#>: " + ChatColor.WHITE + "Convict (confirm) a charge.");
 			return true;
 		}
 
