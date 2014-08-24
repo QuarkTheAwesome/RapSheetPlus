@@ -43,26 +43,41 @@ public class RapsheetCommand {
 		plugin.getLogger().severe(sb.toString());
 	}
 
-	protected void printHelp(CommandSender sender, String label) {
-		if(sender.hasPermission("rapsheet.lookup")) {
-			sender.sendMessage(ChatColor.GRAY + "/" + label + " lookup <player>");
-			sender.sendMessage(ChatColor.GRAY + "/" + label + " lookup <player> <charge#>");
+	protected void printHelp(CommandSender sender, String label, String page) {
+		if (page.equalsIgnoreCase("1")) {
+			sender.sendMessage(ChatColor.GOLD + "----- " + ChatColor.AQUA + "RapSheetPlus" + ChatColor.GOLD + " -----");
+			if(sender.hasPermission("rapsheet.lookup")) {
+				sender.sendMessage(ChatColor.GOLD + "/" + label + " lookup <player>: " + ChatColor.WHITE + "Look up a player's records.");
+				sender.sendMessage(ChatColor.GOLD + "/" + label + " lookup <player> <charge#>: " + ChatColor.WHITE + "Look at a specific charge on a player.");
+			}
+			if(sender.hasPermission("rapsheet.charge")) {
+				sender.sendMessage(ChatColor.GOLD + "/" + label + " charge <player> <reason> <description ...>: " + ChatColor.WHITE + "Charge a player of a crime. Reason is a one-word crime, description goes more into it.");
+			}
+
+			if(sender.hasPermission("rapsheet.lookupme")) {
+				sender.sendMessage(ChatColor.GOLD + "/" + label + " me: " + ChatColor.WHITE + "See your own RAP sheet.");
+				sender.sendMessage(ChatColor.GOLD + "/" + label + " me <charge#>: " + ChatColor.WHITE + "See a specific charge on your RAP sheet.");
+			}
+			sender.sendMessage(ChatColor.GOLD + "Type " + ChatColor.RED + "/" + label + " 2" + ChatColor.GOLD + " to read the next page.");
+		} else if (page.equalsIgnoreCase("2")) {
+			sender.sendMessage(ChatColor.GOLD + "----- " + ChatColor.AQUA + "RapSheetPlus" + ChatColor.GOLD + " -----");
+			if(sender.hasPermission("rapsheet.seal")) {
+				sender.sendMessage(ChatColor.GOLD + "/" + label + " seal <player> <charge#>: " + ChatColor.WHITE + "Seal a charge. Only those with rapsheet.seal can view them.");
+				sender.sendMessage(ChatColor.GOLD + "/" + label + " unseal <player> <charge#>: " + ChatColor.WHITE + "Unseal a charge.");
+			}
+			if(sender.hasPermission("rapsheet.expunge")) {
+				sender.sendMessage(ChatColor.GOLD + "/" + label + " expunge <player> <charge#>: " + ChatColor.WHITE + "Expunge a charge against a player. " + ChatColor.RED + "This cannot be undone.");
+			}
+			if(sender.hasPermission("rapsheet.pardon")) {
+				sender.sendMessage(ChatColor.GOLD + "/" + label + " pardon <player> <charge#>: " + ChatColor.WHITE + "Pardon a charge or conviction.");
+			}
+			if(sender.hasPermission("rapsheet.convict")) {
+				sender.sendMessage(ChatColor.GOLD + "/" + label + " convict <player> <charge#>: " + ChatColor.WHITE + "Convict (confirm) a charge.");
+			}
+			sender.sendMessage(ChatColor.GOLD + "/" + label + " version: " + ChatColor.WHITE + "Display version info.");
+		} else {
+			sender.sendMessage("Error printing help. Please try /rap 1.");
 		}
-		if(sender.hasPermission("rapsheet.charge")) {
-			sender.sendMessage(ChatColor.GRAY + "/" + label + " charge <player> <reason> <description ...>");
-		}
-		if(sender.hasPermission("rapsheet.convict")) {
-			sender.sendMessage(ChatColor.GRAY + "/" + label + " convict <player> <charge#>");
-		}
-		if(sender.hasPermission("rapsheet.pardon")) {
-			sender.sendMessage(ChatColor.GRAY + "/" + label + " pardon <player> <charge#>");
-		}
-		if(sender.hasPermission("rapsheet.seal")) {
-			sender.sendMessage(ChatColor.GRAY + "/" + label + " seal <player> <charge#>");
-			sender.sendMessage(ChatColor.GRAY + "/" + label + " unseal <player> <charge#>");
-		}
-		if(sender.hasPermission("rapsheet.expunge")) {
-			sender.sendMessage(ChatColor.GRAY + "/" + label + " expunge <player> <charge#>");
-		}
-	}
+
+	} 
 }
