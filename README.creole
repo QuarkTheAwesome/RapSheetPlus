@@ -13,15 +13,25 @@ Maven 3 is required to compile RapSheetPlus.
 RapSheetPlus adds the following commands:
 
 /rap lookup <player>: Look up a player's records.
+
 /rap lookup <player> <charge#>: Look at a specific charge on a player.
+
 /rap charge <player> <reason> <description ...>: Charge a player of a crime. Reason is a one-word crime, description goes more into it.
+
 /rap me: See your own RAP sheet.
+
 /rap me <charge#>: See a specific charge on your RAP sheet.
+
 /rap seal <player> <charge#>: Seal a charge. Only those with rapsheet.seal can view them.
+
 /rap unseal <player> <charge#>: Unseal a charge.
+
 /rap expunge <player> <charge#>: Expunge a charge against a player. This cannot be undone.
+
 /rap pardon <player> <charge#>: Pardon a charge or conviction. Pardoned crimes stay on the record.
+
 /rap convict <player> <charge#>: Convict (confirm) a charge.
+
 /rap version: Display version info.
 
 === Permissions
@@ -29,10 +39,17 @@ RapSheetPlus adds the following commands:
 The permissions for RapSheetPlus are:
 
 rapsheet.lookup: /rap lookup (You also need viewsealed to show sealed charges)
+
 rapsheet.charge: /rap charge
+
 rapsheet.lookupme: /rap me
+
 rapsheet.convict: /rap convict
+
 rapsheet.pardon: /rap pardon
+
 rapsheet.seal: /rap seal, /rap unseal
+
 rapsheet.viewsealed: /rap lookup <player> <sealed charge>
+
 rapsheet.expunge: /rap expunge
