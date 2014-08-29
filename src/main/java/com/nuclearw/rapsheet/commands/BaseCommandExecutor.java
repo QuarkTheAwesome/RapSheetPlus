@@ -68,7 +68,7 @@ public class BaseCommandExecutor extends RapsheetCommand implements CommandExecu
 			}
 			sealCommand.onCommand(sender, cmd, label, args);
 		} else if(args[0].equalsIgnoreCase("me")) {
-			if(!sender.hasPermission("rapsheet.seal")) {
+			if(!sender.hasPermission("rapsheet.lookupme")) {
 				sender.sendMessage(NO_PERMISSION);
 				return true;
 			}
