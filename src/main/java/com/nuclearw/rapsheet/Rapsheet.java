@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.PersistenceException;
 
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
 
@@ -16,7 +17,6 @@ import com.nuclearw.rapsheet.locale.LocaleManager;
 public class Rapsheet extends JavaPlugin {
 	private static RapsheetManager manager;
 	private static LocaleManager locale;
-
 	@Override
 	public void onEnable() {
 		initDatabase();
@@ -30,19 +30,16 @@ public class Rapsheet extends JavaPlugin {
 			getPluginLoader().disablePlugin(this);
 			return;
 		}
-
 		manager = new SimpleRapsheetManager(this);
-
 		getCommand("rapsheet").setExecutor(new BaseCommandExecutor(this));
-
 		metrics();
-
 		getLogger().info("Finished loading " + getDescription().getFullName());
 	}
 
 	@Override
 	public void onDisable() {
 		getLogger().info("Finished unloading " + getDescription().getFullName());
+		getLogger().info(ChatColor.RED + "WARNING! If this is a reload, " + getDescription().getFullName() + " will NOT continue running! You will have to restart the server.");
 	}
 
 	@Override
