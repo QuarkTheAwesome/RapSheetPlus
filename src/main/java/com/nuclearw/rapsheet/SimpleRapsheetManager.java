@@ -81,9 +81,15 @@ public class SimpleRapsheetManager implements RapsheetManager {
 				if(player != null && sender == null) {
 					sender = (CommandSender) player;
 				}
-				sender.sendMessage(ChatColor.GOLD + "Charged" + ChatColor.RESET + ": " + ChatColor.AQUA + plugin.getServer().getPlayer(offenderName).getDisplayName());
-				sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + newChargeId + ChatColor.GOLD + " - " + ChatColor.AQUA + shortDescription);
-				sender.sendMessage(ChatColor.GOLD + "Report" + ChatColor.RESET + ": " + ChatColor.GRAY + longDescription);
+				try {
+					sender.sendMessage(ChatColor.GOLD + "Charged" + ChatColor.RESET + ": " + ChatColor.AQUA + plugin.getServer().getPlayer(offenderName).getDisplayName());
+					sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + newChargeId + ChatColor.GOLD + " - " + ChatColor.AQUA + shortDescription);
+					sender.sendMessage(ChatColor.GOLD + "Report" + ChatColor.RESET + ": " + ChatColor.GRAY + longDescription);
+				} catch (NullPointerException ex) {
+					sender.sendMessage(ChatColor.GOLD + "Charged" + ChatColor.RESET + ": " + ChatColor.AQUA + offenderName);
+					sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + newChargeId + ChatColor.GOLD + " - " + ChatColor.AQUA + shortDescription);
+					sender.sendMessage(ChatColor.GOLD + "Report" + ChatColor.RESET + ": " + ChatColor.GRAY + longDescription);
+				}
 			}
 		}
 
@@ -93,9 +99,11 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			} else {
 				if(!officialName.equals("CONSOLE")) {
 					player.sendMessage(ChatColor.GOLD + "Charged by " + ChatColor.AQUA + plugin.getServer().getPlayer(sender.getName()).getDisplayName() + ChatColor.GOLD + " of " + ChatColor.GRAY + shortDescription);
+					player.sendMessage(ChatColor.GOLD + "Report: " + ChatColor.GRAY  + longDescription);
 					player.sendMessage(locale.getString("filed-under", new Object[] {newChargeId}));
 				} else {
 					player.sendMessage(ChatColor.GOLD + "Charged by " + ChatColor.AQUA + officialName + ChatColor.GOLD + " of " + ChatColor.GRAY + shortDescription);
+					player.sendMessage(ChatColor.GOLD + "Report: " + ChatColor.GRAY  + longDescription);
 					player.sendMessage(locale.getString("filed-under", new Object[] {newChargeId}));
 				}
 			}
@@ -137,10 +145,15 @@ public class SimpleRapsheetManager implements RapsheetManager {
 				if(player != null && sender == null) {
 					sender = (CommandSender) player;
 				}
-
-				sender.sendMessage(ChatColor.DARK_RED + "Convicted" + ChatColor.RESET + ": " + ChatColor.AQUA + plugin.getServer().getPlayer(found.getOffender()).getDisplayName());
-				sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
-				sender.sendMessage(ChatColor.GOLD + "Report" + ChatColor.RESET + ": " + ChatColor.GRAY + found.getChargeLong());
+				try {
+					sender.sendMessage(ChatColor.DARK_RED + "Convicted" + ChatColor.RESET + ": " + ChatColor.AQUA + plugin.getServer().getPlayer(found.getOffender()).getDisplayName());
+					sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
+					sender.sendMessage(ChatColor.GOLD + "Report" + ChatColor.RESET + ": " + ChatColor.GRAY + found.getChargeLong());
+				} catch (NullPointerException ex) {
+					sender.sendMessage(ChatColor.DARK_RED + "Convicted" + ChatColor.RESET + ": " + ChatColor.AQUA + offenderName);
+					sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
+					sender.sendMessage(ChatColor.GOLD + "Report" + ChatColor.RESET + ": " + ChatColor.GRAY + found.getChargeLong());
+				}
 			}
 		}
 
@@ -150,9 +163,11 @@ public class SimpleRapsheetManager implements RapsheetManager {
 			} else {
 				if (!officialName.equals("CONSOLE")) {
 					player.sendMessage(ChatColor.DARK_RED + "Convicted" + ChatColor.GOLD + " by " + ChatColor.AQUA + plugin.getServer().getPlayer(sender.getName()).getDisplayName() + ChatColor.GOLD + " of " + ChatColor.GRAY + found.getChargeShort());
+					player.sendMessage(ChatColor.GOLD + "Report: " + ChatColor.GRAY + found.getChargeLong());
 					player.sendMessage(ChatColor.GOLD + "Filed under Charge " + ChatColor.RESET + "#" + found.getChargeId());	
 				} else {
 					player.sendMessage(ChatColor.DARK_RED + "Convicted" + ChatColor.GOLD + " by " + ChatColor.AQUA + officialName + ChatColor.GOLD + " of " + ChatColor.GRAY + found.getChargeShort());
+					player.sendMessage(ChatColor.GOLD + "Report: " + ChatColor.GRAY + found.getChargeLong());
 					player.sendMessage(ChatColor.GOLD + "Filed under Charge " + ChatColor.RESET + "#" + found.getChargeId());
 				}
 			}
@@ -195,10 +210,16 @@ public class SimpleRapsheetManager implements RapsheetManager {
 				if(player != null && sender == null) {
 					sender = (CommandSender) player;
 				}
+				try {
+					sender.sendMessage(ChatColor.LIGHT_PURPLE + "Pardoned" + ChatColor.RESET + ": " + ChatColor.AQUA + plugin.getServer().getPlayer(found.getOffender()).getDisplayName());
+					sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
+					player.sendMessage(ChatColor.GOLD + "Report: " + ChatColor.GRAY  + found.getChargeLong());
+				} catch (NullPointerException ex) {
+					sender.sendMessage(ChatColor.LIGHT_PURPLE + "Pardoned" + ChatColor.RESET + ": " + ChatColor.AQUA + offenderName);
+					sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
+					player.sendMessage(ChatColor.GOLD + "Report: " + ChatColor.GRAY  + found.getChargeLong());
+				}
 
-				sender.sendMessage(ChatColor.LIGHT_PURPLE + "Pardoned" + ChatColor.RESET + ": " + ChatColor.AQUA + plugin.getServer().getPlayer(found.getOffender()).getDisplayName());
-				sender.sendMessage(ChatColor.GOLD + "Charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
-				sender.sendMessage(ChatColor.GOLD + "Report" + ChatColor.RESET + ": " + ChatColor.GRAY + found.getChargeLong());
 			}
 		}
 
@@ -253,7 +274,6 @@ public class SimpleRapsheetManager implements RapsheetManager {
 				if(player != null && sender == null) {
 					sender = (CommandSender) player;
 				}
-
 				sender.sendMessage(ChatColor.GRAY + "Sealed " + ChatColor.GOLD + "charge " + ChatColor.RESET + "#" + found.getChargeId() + ChatColor.GOLD + " - " + ChatColor.AQUA + found.getChargeShort());
 			}
 		}

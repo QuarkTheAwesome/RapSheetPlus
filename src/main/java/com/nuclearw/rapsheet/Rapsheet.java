@@ -39,7 +39,7 @@ public class Rapsheet extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		getLogger().info("Finished unloading " + getDescription().getFullName());
-		getLogger().info(ChatColor.RED + "WARNING! If this is a reload, " + getDescription().getFullName() + " will NOT continue running! You will have to restart the server.");
+		getLogger().warning(ChatColor.RED + "WARNING! If this is a reload, " + getDescription().getFullName() + " will NOT continue running! You will have to restart the server.");
 	}
 
 	@Override
