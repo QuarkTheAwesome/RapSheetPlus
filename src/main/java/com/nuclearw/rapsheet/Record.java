@@ -47,7 +47,7 @@ public class Record {
 	@Enumerated
 	@Column(name="state")
 	private RecordState state;
-
+	
 	public int getId() {
 		return id;
 	}

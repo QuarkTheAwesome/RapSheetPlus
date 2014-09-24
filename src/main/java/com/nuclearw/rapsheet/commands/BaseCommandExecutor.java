@@ -18,6 +18,7 @@ public class BaseCommandExecutor extends RapsheetCommand implements CommandExecu
 	private CommandExecutor unsealCommand  = new UnsealCommandExecutor(plugin);
 	private CommandExecutor expungeCommand = new ExpungeCommandExecutor(plugin);
 	private CommandExecutor meCommand = new MeCommandExecutor(plugin);
+	private CommandExecutor brandCommand = new BrandCommandExecutor(plugin);
 
 	public BaseCommandExecutor(Rapsheet plugin) {
 		super(plugin);
@@ -49,12 +50,23 @@ public class BaseCommandExecutor extends RapsheetCommand implements CommandExecu
 			convictCommand.onCommand(sender, cmd, label, args);
 		} else if(args[0].equalsIgnoreCase("2")) {
 			printHelp(sender, label, "2");
+		} else if(args[0].equalsIgnoreCase("help")) {
+			try {
+				if(args[1].equalsIgnoreCase("2")) {
+					printHelp(sender, label, "2");
+					return true;
+				}
+			} catch (Exception ex) {}
+			printHelp(sender, label, "1");
+			return true;
 		} else if(args[0].equalsIgnoreCase("version")) {
-			sender.sendMessage(ChatColor.GOLD + "----- " + ChatColor.AQUA + "RapSheetPlus 0.2" + ChatColor.GOLD + " -----");
+			sender.sendMessage(ChatColor.GOLD + "----- " + ChatColor.AQUA + this.plugin.getDescription().getFullName() + ChatColor.GOLD + " -----");
 			sender.sendMessage(ChatColor.GOLD + "Original plugin by " + ChatColor.AQUA + "NuclearW" + ChatColor.GOLD + ". Original available here:");
 			sender.sendMessage(ChatColor.GRAY + "https://github.com/NuclearW/Rapsheet");
 			sender.sendMessage(ChatColor.GOLD + "'Plus' version by " + ChatColor.AQUA + "Quark" + ChatColor.GOLD + ". Available here:");
 			sender.sendMessage(ChatColor.GRAY + "https://github.com/QuarkTheAwesome/RapSheetPlus");
+			sender.sendMessage(ChatColor.GOLD + "Find it on BukkitDev!");
+			sender.sendMessage(ChatColor.GRAY + "http://dev.bukkit.org/bukkit-plugins/rapsheetplus/");
 		} else if(args[0].equalsIgnoreCase("pardon")) {
 			if(!sender.hasPermission("rapsheet.pardon")) {
 				sender.sendMessage(NO_PERMISSION);
@@ -85,6 +97,12 @@ public class BaseCommandExecutor extends RapsheetCommand implements CommandExecu
 				return true;
 			}
 			expungeCommand.onCommand(sender, cmd, label, args);
+		} else if(args[0].equalsIgnoreCase("brand")) {
+			if(!sender.hasPermission("rapsheet.brand")) {
+				sender.sendMessage(NO_PERMISSION);
+				return true;
+			}
+			brandCommand.onCommand(sender, cmd, label, args);
 		} else {
 			printHelp(sender, label, "1");
 		}

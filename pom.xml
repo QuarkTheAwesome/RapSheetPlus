@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.nuclearw.rapsheet</groupId>
     <artifactId>Rapsheet</artifactId>
-    <version>0.3</version>
+    <version>0.4b</version>
     <name>Rapsheet</name>
     <url>https://github.com/NuclearW/Rapsheet</url>
     <issueManagement>
