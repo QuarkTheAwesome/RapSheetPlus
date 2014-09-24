@@ -34,6 +34,8 @@ RapSheetPlus adds the following commands:
 
 /rap version: Display version info.
 
+/rap brand <player> <brand...>: Brand a player of a crime. Leave blank to remove.
+
 === Permissions
 
 The permissions for RapSheetPlus are:
@@ -53,3 +55,9 @@ rapsheet.seal: /rap seal, /rap unseal
 rapsheet.viewsealed: /rap lookup <player> <sealed charge>
 
 rapsheet.expunge: /rap expunge
+
+rapsheet.brand: /rap brand
+
+autoupdate.notify: Get notified when an update is available.
+
+autoupdate.update.rapsheetplus: Update RapSheetPlus. 
