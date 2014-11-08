@@ -11,11 +11,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mcstats.Metrics;
 
 import com.nuclearw.rapsheet.api.RapsheetManager;
 import com.nuclearw.rapsheet.commands.BaseCommandExecutor;
@@ -54,7 +53,6 @@ public class Rapsheet extends JavaPlugin implements Listener {
 		}
 		manager = new SimpleRapsheetManager(this);
 		getCommand("rapsheet").setExecutor(new BaseCommandExecutor(this));
-		metrics();
     	PluginManager manager = getServer().getPluginManager();
         manager.registerEvents(this, this);
 		getLogger().info("Finished loading " + getDescription().getFullName());
@@ -88,15 +86,8 @@ public class Rapsheet extends JavaPlugin implements Listener {
 			this.installDDL();
 		}
 	}
-
-	private void metrics() {
-		try {
-			Metrics metrics = new Metrics(this);
-//			metrics.start();
-		} catch (IOException e) { }
-	}
 	  @EventHandler
-	  public void onChat(PlayerChatEvent e)
+	  public void onChat(AsyncPlayerChatEvent e)
 	  {
 	    Player player = e.getPlayer();
 	    if (Rapsheet.getInstance().getConfig().getString(player.getName()) != null) {

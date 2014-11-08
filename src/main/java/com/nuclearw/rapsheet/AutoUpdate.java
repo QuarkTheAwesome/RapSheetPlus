@@ -190,7 +190,7 @@ private class ResetTask implements Runnable
 		if(bs.isQueued(AutoUpdate.this.pid) || bs.isCurrentlyRunning(AutoUpdate.this.pid))
 		  bs.cancelTask(AutoUpdate.this.pid);
 		if(restart)
-		  AutoUpdate.this.pid = bs.scheduleAsyncRepeatingTask(plugin, AutoUpdate.this, 5L, delay);
+		  AutoUpdate.this.pid = bs.runTaskTimerAsynchronously(plugin, AutoUpdate.this, 5L, delay).getTaskId();
 		else
 		  AutoUpdate.this.pid = -1;
 		lock.set(false);
@@ -557,7 +557,7 @@ private void update(CommandSender sender)
 	}
 	final BukkitScheduler bs = plugin.getServer().getScheduler();
 	final String pn = sender instanceof Player ? ((Player)sender).getName() : null;
-	bs.scheduleAsyncDelayedTask(plugin, new Runnable()
+	bs.runTaskLaterAsynchronously(plugin, new Runnable()
 	{
 	  public void run()
 	  {
@@ -614,7 +614,7 @@ private void update(CommandSender sender)
 		  printStackTraceSync(t, false);
 		}
 	  }
-	});
+	}, 20*30);
 }
 
 private void printStackTraceSync(Throwable t, boolean expected)
@@ -673,7 +673,7 @@ private void printStackTraceSync(Throwable t, boolean expected)
 	if(!expected)
 	{
 	  bs.cancelTask(pid);
-	  bs.scheduleAsyncDelayedTask(plugin, new Runnable()
+	  bs.runTaskLaterAsynchronously(plugin, new Runnable()
 	  {
 		public void run()
 		{
@@ -693,7 +693,7 @@ private void printStackTraceSync(Throwable t, boolean expected)
 		  updateURL = updateVersion = pluginURL = type = null;
 		  lock.set(false);
 		}
-	  });
+	  }, 20*30);
 	}
 }
 

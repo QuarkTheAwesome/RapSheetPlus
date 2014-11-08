@@ -7,8 +7,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import com.nuclearw.rapsheet.Rapsheet;
-import com.nuclearw.rapsheet.Record;
-import com.nuclearw.rapsheet.api.NotifyChanges;
 
 public class BrandCommandExecutor extends RapsheetCommand implements CommandExecutor {
 	public BrandCommandExecutor(Rapsheet plugin) {

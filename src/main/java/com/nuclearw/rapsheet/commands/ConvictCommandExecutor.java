@@ -51,6 +51,8 @@ public class ConvictCommandExecutor extends RapsheetCommand implements CommandEx
 				case PARDONED:
 					message += "have been pardoned for!";
 					break;
+			default:
+				break;
 			}
 
 			sender.sendMessage(message);

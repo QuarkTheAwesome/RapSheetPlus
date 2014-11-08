@@ -15,11 +15,9 @@ import org.bukkit.ChatColor;
 import com.nuclearw.rapsheet.Rapsheet;
 
 public class LocaleManager {
-	private Rapsheet plugin;
 	private ResourceBundle bundle;
 
 	public LocaleManager(Rapsheet plugin) throws IOException {
-		this.plugin = plugin;
 
 		InputStreamReader isr = new InputStreamReader(plugin.getResource("lang.properties"));
 		ResourceBundle internal = new PropertyResourceBundle(isr);
