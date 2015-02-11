@@ -1,8 +1,10 @@
 package com.nuclearw.rapsheet.api.events;
 
+import java.util.UUID;
+
 
 public class RapsheetPardonEvent extends RapsheetEvent {
-	public RapsheetPardonEvent(String offenderName, String officialName, int chargeId) {
-		super(offenderName, officialName, chargeId);
+	public RapsheetPardonEvent(UUID offenderUUID, UUID officialUUID, int chargeId) {
+		super(offenderUUID, officialUUID, chargeId);
 	}
 }

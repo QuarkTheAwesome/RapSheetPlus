@@ -1,23 +1,24 @@
 package com.nuclearw.rapsheet.api;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.nuclearw.rapsheet.Record;
 
 public interface RapsheetManager {
-	public List<Record> getCharges(String playerName);
+	public List<Record> getCharges(UUID playerUUID);
 
-	public Record getCharge(String playerName, int chargeId);
+	public Record getCharge(UUID playerUUID, int chargeId);
 
-	public int chargePlayer(String offenderName, String officialName, String shortDescription, String longDescription, NotifyChanges notify);
+	public int chargePlayer(UUID offenderUUID, UUID officialUUID, String shortDescription, String longDescription, NotifyChanges notify);
 
-	public boolean convictPlayer(String offenderName, String officialName, int chargeId, NotifyChanges notify);
+	public boolean convictPlayer(UUID offenderUUID, UUID officialUUID, int chargeId, NotifyChanges notify);
 
-	public boolean pardonPlayer(String offenderName, String officialName, int chargeId, NotifyChanges notify);
+	public boolean pardonPlayer(UUID offenderUUID, UUID officialUUID, int chargeId, NotifyChanges notify);
 
-	public boolean sealPlayerCharge(String offenderName, String officialName, int chargeId, NotifyChanges notify);
+	public boolean sealPlayerCharge(UUID offenderUUID, UUID officialUUID, int chargeId, NotifyChanges notify);
 
-	public boolean unsealPlayerCharge(String offenderName, String officialName, int chargeId, NotifyChanges notify);
+	public boolean unsealPlayerCharge(UUID offenderUUID, UUID officialUUID, int chargeId, NotifyChanges notify);
 
-	public boolean expungePlayerCharge(String offenderName, String officialName, int chargeId, NotifyChanges notify);
+	public boolean expungePlayerCharge(UUID offenderUUID, UUID officialUUID, int chargeId, NotifyChanges notify);
 }

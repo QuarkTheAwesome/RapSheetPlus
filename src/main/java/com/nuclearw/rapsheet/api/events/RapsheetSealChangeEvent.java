@@ -1,11 +1,13 @@
 package com.nuclearw.rapsheet.api.events;
 
+import java.util.UUID;
+
 
 public class RapsheetSealChangeEvent extends RapsheetEvent {
 	private final boolean sealing;
 
-	public RapsheetSealChangeEvent(String offenderName, String officialName, int chargeId, final boolean sealing) {
-		super(offenderName, officialName, chargeId);
+	public RapsheetSealChangeEvent(UUID offenderUUID, UUID officialUUID, int chargeId, final boolean sealing) {
+		super(offenderUUID, officialUUID, chargeId);
 
 		this.sealing = sealing;
 	}

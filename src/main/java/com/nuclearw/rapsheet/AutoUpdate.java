@@ -77,7 +77,7 @@ private boolean debug = true;
 * plugin and change the version to something unique (like adding -<yourName>).
 */
 
-private final String version = "1.4";
+private final String version = "1.4-RSPMod";
 
 private final Plugin plugin;
 private int pid = -1;

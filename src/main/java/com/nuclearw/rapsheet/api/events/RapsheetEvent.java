@@ -1,25 +1,27 @@
 package com.nuclearw.rapsheet.api.events;
 
+import java.util.UUID;
+
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 public abstract class RapsheetEvent extends Event {
-	protected final String offenderName;
-	protected final String officialName;
+	protected final UUID offenderUUID;
+	protected final UUID officialUUID;
 	protected final int chargeId;
 
-	public RapsheetEvent(final String offenderName, final String officialName, final int chargeId) {
-		this.officialName = officialName;
-		this.offenderName = offenderName;
+	public RapsheetEvent(final UUID offenderUUID, final UUID officialUUID, final int chargeId) {
+		this.officialUUID = officialUUID;
+		this.offenderUUID = offenderUUID;
 		this.chargeId = chargeId;
 	}
 
-	public final String getOffender() {
-		return offenderName;
+	public final UUID getOffender() {
+		return offenderUUID;
 	}
 
-	public final String getOfficial() {
-		return officialName;
+	public final UUID getOfficial() {
+		return officialUUID;
 	}
 
 	public final int getChargeId() {

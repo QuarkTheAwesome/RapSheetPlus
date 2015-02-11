@@ -1,5 +1,7 @@
 package com.nuclearw.rapsheet.commands;
 
+import java.util.UUID;
+
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
@@ -17,7 +19,7 @@ public class RapsheetCommand {
 		this.plugin = plugin;
 	}
 
-	protected String findTarget(String target) {
+	protected UUID findTarget(UUID target) {
 		OfflinePlayer search = plugin.getServer().getPlayer(target);
 
 		if(search == null) {
@@ -25,7 +27,7 @@ public class RapsheetCommand {
 		}
 
 		if(search != null) {
-			target = search.getName();
+			target = search.getUniqueId();
 		}
 
 		return target;

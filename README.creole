@@ -4,6 +4,9 @@ Rapsheet lets you charge players of crimes, and then look them up later.
 RapSheetPlus is a better version made by Quark. The original's by NuclearW.
 RapSheetPlus works on the latest Bukkit (1.7.10-R01). Compiled version (a .jar) is in the jars folder.
 
+==Warning! This version of RSP (uuid-test) is extremely unlikely to work!
+==You are strongly advised to swap back to the 'master' branch.
+
 === Compiling
 
 Maven 3 is required to compile RapSheetPlus.

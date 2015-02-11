@@ -90,7 +90,7 @@ public class Rapsheet extends JavaPlugin implements Listener {
 	  public void onChat(AsyncPlayerChatEvent e)
 	  {
 	    Player player = e.getPlayer();
-	    if (Rapsheet.getInstance().getConfig().getString(player.getName()) != null) {
+	    if (Rapsheet.getInstance().getConfig().getString(player.getName()) != null) { //TODO: get this on UUIDs
 	    		      String s = Rapsheet.getInstance().getConfig().getString(player.getName());
 	      e.setFormat(ChatColor.translateAlternateColorCodes('&', s) + ChatColor.RESET + e.getFormat());
 	    }

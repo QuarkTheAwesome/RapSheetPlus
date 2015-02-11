@@ -1,5 +1,7 @@
 package com.nuclearw.rapsheet;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -22,11 +24,11 @@ public class Record {
 
 	@NotEmpty
 	@Column(name="offender")
-	private String offender;
+	private UUID offender;
 
 	@NotEmpty
 	@Column(name="official")
-	private String official;
+	private UUID official;
 
 	@NotEmpty
 	@Column(name="charge_short")
@@ -64,19 +66,19 @@ public class Record {
 		this.chargeId = chargeId;
 	}
 
-	public String getOffender() {
+	public UUID getOffender() {
 		return offender;
 	}
 
-	public void setOffender(String offender) {
+	public void setOffender(UUID offender) {
 		this.offender = offender;
 	}
 
-	public String getOfficial() {
+	public UUID getOfficial() {
 		return official;
 	}
 
-	public void setOfficial(String official) {
+	public void setOfficial(UUID official) {
 		this.official = official;
 	}
 

@@ -1,12 +1,17 @@
 package com.nuclearw.rapsheet.commands;
 
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import com.nuclearw.rapsheet.Rapsheet;
 import com.nuclearw.rapsheet.Record;
+import com.nuclearw.rapsheet.UUIDFetcher;
 import com.nuclearw.rapsheet.api.NotifyChanges;
 
 public class SealCommandExecutor extends RapsheetCommand implements CommandExecutor {
@@ -23,7 +28,7 @@ public class SealCommandExecutor extends RapsheetCommand implements CommandExecu
 			return true;
 		}
 
-		String target = findTarget(args[1]);
+		UUID target = findTarget(UUIDFetcher.getUUIDOf(args[1]));
 
 		int chargeId = -1;
 
@@ -38,7 +43,7 @@ public class SealCommandExecutor extends RapsheetCommand implements CommandExecu
 		Record found = Rapsheet.getManager().getCharge(target, chargeId);
 
 		if(found == null) {
-			sender.sendMessage(COULD_NOT_FIND_CHARGE.replace("<PLAYER>", target));
+			sender.sendMessage(COULD_NOT_FIND_CHARGE.replace("<PLAYER>", Bukkit.getPlayer(target).getName()));
 			return true;
 		}
 
@@ -47,7 +52,7 @@ public class SealCommandExecutor extends RapsheetCommand implements CommandExecu
 			return true;
 		}
 
-		boolean success = Rapsheet.getManager().sealPlayerCharge(target, sender.getName(), chargeId, NotifyChanges.BOTH);
+		boolean success = Rapsheet.getManager().sealPlayerCharge(target, ((Player) sender).getUniqueId(), chargeId, NotifyChanges.BOTH);
 
 		if(!success) {
 			plugin.getLogger().severe("Error trying to seal player " + target + "'s chargeId: " + chargeId);

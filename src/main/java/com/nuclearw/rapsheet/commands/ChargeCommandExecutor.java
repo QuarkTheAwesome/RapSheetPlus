@@ -1,11 +1,15 @@
 package com.nuclearw.rapsheet.commands;
 
+import java.util.UUID;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import com.nuclearw.rapsheet.Rapsheet;
+import com.nuclearw.rapsheet.UUIDFetcher;
 import com.nuclearw.rapsheet.api.NotifyChanges;
 
 public class ChargeCommandExecutor extends RapsheetCommand implements CommandExecutor {
@@ -21,7 +25,7 @@ public class ChargeCommandExecutor extends RapsheetCommand implements CommandExe
 			return true;
 		}
 
-		String target = findTarget(args[1]);
+		UUID target = findTarget(UUIDFetcher.getUUIDOf(args[1]));
 
 		StringBuilder sb = new StringBuilder();
 
@@ -32,7 +36,7 @@ public class ChargeCommandExecutor extends RapsheetCommand implements CommandExe
 
 		String chargeDescription = sb.toString().trim();
 
-		int newChargeId = Rapsheet.getManager().chargePlayer(target, sender.getName(), args[2], chargeDescription, NotifyChanges.BOTH);
+		int newChargeId = Rapsheet.getManager().chargePlayer(target, ((Player) sender).getUniqueId(), args[2], chargeDescription, NotifyChanges.BOTH);
 
 		if(newChargeId < 0) {
 			plugin.getLogger().severe("There was an error trying to charge player " + target + ": Got chargeId " + newChargeId);

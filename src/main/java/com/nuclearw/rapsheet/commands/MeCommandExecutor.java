@@ -3,11 +3,13 @@ package com.nuclearw.rapsheet.commands;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import com.nuclearw.rapsheet.Rapsheet;
 import com.nuclearw.rapsheet.Record;
@@ -28,7 +30,7 @@ public class MeCommandExecutor extends RapsheetCommand implements CommandExecuto
 
 		SimpleDateFormat format = new SimpleDateFormat("MMM d, yyyy h:mm");
 
-		String target = sender.getName();
+		UUID target = ((Player) sender).getUniqueId();
 		if(args.length == 1) {
 			List<Record> found = Rapsheet.getManager().getCharges(target);
 
@@ -95,7 +97,7 @@ public class MeCommandExecutor extends RapsheetCommand implements CommandExecuto
 			Record found = Rapsheet.getManager().getCharge(target, chargeId);
 
 			if(found == null) {
-				sender.sendMessage(COULD_NOT_FIND_CHARGE.replace("<PLAYER>", target));
+				sender.sendMessage(COULD_NOT_FIND_CHARGE.replace("<PLAYER>", org.bukkit.Bukkit.getPlayer(target).getName()));
 				return true;
 			}
 

@@ -1,7 +1,9 @@
 package com.nuclearw.rapsheet.api.events;
 
+import java.util.UUID;
+
 public class RapsheetExpungeEvent extends RapsheetEvent {
-	public RapsheetExpungeEvent(String offenderName, String officialName, int chargeId) {
-		super(offenderName, officialName, chargeId);
+	public RapsheetExpungeEvent(UUID offenderUUID, UUID officialUUID, int chargeId) {
+		super(offenderUUID, officialUUID, chargeId);
 	}
 }
